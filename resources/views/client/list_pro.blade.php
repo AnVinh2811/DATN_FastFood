@@ -70,7 +70,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> -->
 
 <div class="services-breadcrumb">
-	<div class="agile_inner_breadcrumb" >
+	<div class="agile_inner_breadcrumb">
 		<div class="container">
 			<ul class="w3_short" style="color: #fff;">
 				<li>
@@ -116,21 +116,18 @@
 								<div class="men-thumb-item text-center">
 
 									<a href="{{route('cli_detail',$s1->product_id)}}">
-										<?php
-										$gia = ($s1->gia_km * 100) / $s1->product_price;
-										?>
-										@if($s1->gia_km < $s1->product_price && $s1->gia_km >0)
-											<span class="badge badge-pill badge-danger ban">-{{ROUND($gia,1)}}%</span>
-											@endif
-											<div class="scale-img">
-												<img class="pro_img3" src="{!! asset('images/'.$s1->product_image)!!}" alt="">
-
-												<!--  -->
-
-											</div></a>
+										<div class="scale-img">
+											<?php
+											$gia = ($s1->gia_km * 100) / $s1->product_price;
+											?>
+											@if($s1->gia_km < $s1->product_price && $s1->gia_km >0)
+												<span class="badge badge-pill badge-danger ban">-{{ROUND($gia,1)}}%</span>
+												@endif
+												<img class="pro_img" src="{!! asset('images/'.$s1->product_image)!!}" alt="">
+										</div>
+									</a>
 
 									<?php
-
 									$tong = 0;
 									if ($s1->pro_rating) {
 										$tong = round(($s1->pro_rating_number) / ($s1->pro_rating));

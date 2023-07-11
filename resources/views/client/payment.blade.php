@@ -85,7 +85,7 @@
 					@if($cou['coupon_condition']==1)
 					<div class="giamgia">
 						<span class="magiamgia" style="font-weight: bold;">MÃ GIẢM GIÁ : </span>-{{$cou['coupon_number']}} % @if(Session('coupon'))
-					</div>	
+					</div>
 					@endif
 					<p>
 						@php
@@ -187,23 +187,24 @@
 				<div class="address_form_agile mt-sm-5 mt-4">
 					<!-- <h4 class="mb-sm-4 mb-3">@lang('lang.cus_info')</h4> -->
 					<br>
+					@foreach($cus as $c)
 					<form action="{{URL::to('/confirm-order1')}}" method="post" id="pay-form" class="creditly-card-form agileinfo_form">
 						@csrf
 						<div class="creditly-wrapper wthree, w3_agileits_wrapper">
 							<div class="information-wrapper">
 								<div class="first-row">
 									<div class="controls form-group">
-										<input class="form-control shipping_name" type="text" name="shipping_name" placeholder="@lang('lang.cus_name')" required="">
+										<input type="text" name="shipping_name" class="form-control shipping_name" value="{{$c->customer_name}}" placeholder="@lang('lang.cus_name')" required>
 									</div>
 
 									<div class="w3_agileits_card_number_grid_left form-group">
 										<div class="controls">
-											<input type="email" class="form-control shipping_email" placeholder="@lang('lang.E_cus')" name="shipping_email" required="">
+											<input type="email" name="shipping_email" class="form-control shipping_email" value="{{$c->customer_email}}" placeholder="@lang('lang.cus_email')" required>
 										</div>
 									</div>
 									<div class="w3_agileits_card_number_grid_right form-group">
 										<div class="controls">
-											<input type="text" class="form-control shipping_phone" placeholder="@lang('lang.num')" name="shipping_phone" required="required">
+											<input type="phone" name="shipping_phone" class="form-control shipping_phone" value="{{$c->customer_phone}}" placeholder="@lang('lang.num')" required>
 											<span id="status"></span>
 										</div>
 									</div>
@@ -211,25 +212,29 @@
 										<div class="controls1">
 											<input type="text" class="form-control shipping_address" placeholder="Số nhà, Tên đường, Phường" name="shipping_address" required="">
 										</div>
-
+										<div style="padding-top: 10px;
+  													padding-left: 60px;">
+													Quận
+										</div>
 										<div class="controls2">
 											<select class="form-control shipping_address1" placeholder="Quận" name="shipping_address1">
-												<option value="Quận 1">Quận 1</option>
-												<option value="Quận 2">Quận 2</option>
-												<option value="Quận 3">Quận 3</option>
-												<option value="Quận 4">Quận 4</option>
-												<option value="Quận 5">Quận 5</option>
-												<option value="Quận 6">Quận 6</option>
-												<option value="Quận 7">Quận 7</option>
-												<option value="Quận 8">Quận 8</option>
-												<option value="Quận 9">Quận 9</option>
-												<option value="Quận 10">Quận 10</option>
-												<option value="Quận 11">Quận 11</option>
-												<option value="Quận 12">Quận 12</option>
-												<option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
-												<option value="Quận Tân Phú">Quận Tân Phú</option>
-												<option value="Quận Phú Nhuận">Quận Phú Nhuận</option>
-												<option value="Quận Thủ Đức">Quận Thủ Đức</option>
+												<option value="Quận 1">1</option>
+												<option value="Quận 2">2</option>
+												<option value="Quận 3">3</option>
+												<option value="Quận 4">4</option>
+												<option value="Quận 5">5</option>
+												<option value="Quận 6">6</option>
+												<option value="Quận 7">7</option>
+												<option value="Quận 8">8</option>
+												<option value="Quận 9">9</option>
+												<option value="Quận 10">10</option>
+												<option value="Quận 11">11</option>
+												<option value="Quận 12">12</option>
+												<option value="Quận Bình Thạnh">Bình Thạnh</option>
+												<option value="Quận Tân Bình">Tân Bình</option>
+												<option value="Quận Tân Phú">Tân Phú</option>
+												<option value="Quận Phú Nhuận">Phú Nhuận</option>
+												<option value="Quận Thủ Đức">Thủ Đức</option>
 											</select>
 										</div>
 
@@ -266,7 +271,7 @@
 								$vnd_to_usd=$total_after/23083;
 								@endphp
 								<div style="display: none;margin-left:108px" id="paypal-button" class="pay"></div>
-								<input type="hidden" id="vnd_to_usd" value="{{round($vnd_to_usd,2)}}">
+								<input type="hidden" id="vnd_to_usd" value="{{round($vnd_to_usd)}}">
 
 
 								<?php
@@ -278,6 +283,7 @@
 							</div>
 						</div>
 					</form>
+					@endforeach
 
 				</div>
 			</div>

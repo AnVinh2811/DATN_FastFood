@@ -22,7 +22,7 @@
     </script>
 
     @yield('script')
-<!-- Login -->
+    <!-- Login -->
     <script>
         $('#login-form').validate({
             rules: {
@@ -53,7 +53,7 @@
             }
         });
     </script>
-<!-- Regis -->
+    <!-- Regis -->
     <script>
         $('#regis-form').validate({
             rules: {
@@ -112,7 +112,7 @@
 
         });
     </script>
-<!-- PayForm -->
+    <!-- PayForm -->
     <script>
         $("#pay-form").validate({
             rules: {
@@ -140,7 +140,7 @@
             },
             messages: {
                 shipping_name: {
-                    required: "vui lòng nhập tên",
+                    required: "Vui lòng nhập tên",
                     minlength: "Vui lòng nhập ít nhất 5 ký tự"
                 },
                 shipping_email: {
@@ -159,6 +159,86 @@
                 },
 
 
+            }
+        });
+    </script>
+
+
+    <script>
+        $('#change_info_form').validate({
+            ignore: '.ignore',
+            errorClass: 'invalid',
+            validClass: 'success',
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 32
+                },
+                email: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 32
+                },
+                phone: {
+                    required: true,
+                    equalTo: '#password'
+                },
+            },
+            messages: {
+                name: {
+                    required: 'Vui lòng nhậphọ và tên của bạn.',
+                },
+                email: {
+                    required: 'Vui lòng nhập email của bạn.',
+                },
+                phone: {
+                    required: 'Vui lòng nhập số điện thoại của bạn.',
+                },
+            },
+            submitHandel: function(form) {
+                $.LoadOverlay("show");
+                form.submit();
+            }
+        });
+    </script>
+
+
+    <script>
+        $('#change_password_form').validate({
+            ignore: '.ignore',
+            errorClass: 'invalid',
+            validClass: 'success',
+            rules: {
+                old_password: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 32
+                },
+                new_password: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 32
+                },
+                confirm_password: {
+                    required: true,
+                    equalTo: '#password'
+                },
+            },
+            messages: {
+                old_password: {
+                    required: 'Vui lòng nhập mật khẩu hiện tại của bạn.',
+                },
+                new_password: {
+                    required: 'Vui lòng nhập mật khẩu của bạn.',
+                },
+                confirm_password: {
+                    required: 'Vui lòng nhập lại mật khẩu của bạn.',
+                },
+            },
+            submitHandel: function(form) {
+                $.LoadOverlay("show");
+                form.submit();
             }
         });
     </script>
@@ -269,7 +349,7 @@
     <script src="{!! asset('layout_admin/js/validate.js')!!}"></script>
 
 
-<!-- HuyDonHang -->
+    <!-- HuyDonHang -->
     <script type="text/javascript">
         function huydonhang(myid) {
             var id = myid;
@@ -307,38 +387,6 @@
                     });
                 } else {
                     swal("Đóng", "Đơn hàng chưa bị hủy", "error");
-                }
-            });
-
-        }
-    </script>
-
-
-<!-- Cập nhật thông tin -->
-<script type="text/javascript">
-        function huydonhang(myid) {
-            var id = myid;
-            var lydo = $('.lydohuydon').val();
-            var order_status = 3;
-            var _token = $('input[name="_token"]').val();
-            swal( function(isConfirm) {
-                if (isConfirm) {
-                    $.ajax({
-                        url: '../huy-don-hang',
-                        method: "post",
-                        data: {
-                            _token: _token,
-                            id: id,
-                            lydo: lydo,
-                            order_status: order_status
-                        },
-                        success: function(data) {
-                            // alert('Hủy đơn hàng thành công');
-                            swal("Đồng ý", "Đơn hàng đã được hủy", "success");
-                            // location.reload();
-                        }
-
-                    });
                 }
             });
 

@@ -22,6 +22,7 @@ use App\Models\custommer;
 use App\Models\chinhsach;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
@@ -67,7 +68,7 @@ class ClientController extends Controller
         $output = '';
 
         $output .= '<div class="cart">
-    <img class=" left1" width="70px" height="60px" src="../web/images/so.jpg" alt="">
+    <img class=" left1" width="70px" height="55px" src="../web/images/download.png" alt="">
     <div class="cart-items">';
         $output .= '<ul>';
         if (session::get('cart')) {
@@ -266,6 +267,45 @@ class ClientController extends Controller
         return view('client.profile.info_account', compact('meta_title', 'meta_desc', 'url_canonical', 'com', 'cate', 'cate_post1', 'chinh', 'cus'));
     }
 
+    public function update_profile(Request $request)
+    {
+        $this->validate($request, [
+            [
+                'name' => 'required|min:8|max:32',
+                'email' => 'required|min:8|max:32',
+                'phone' => 'required|same:new_password',
+            ],
+            [
+                'name.required' => '+Bạn chưa nhập họ và tên',
+                'email.required' => '+Bạn chưa nhập email',
+                'phone.required' => '+Bạn chưa nhập số diện thoại',
+                'phone.min' => '+Mật khẩu phải lớn hơn 8',
+                'phone.max' => '+Mật khẩu phải nhỏ hơn 11',
+            ]
+        ]);
+        $name = $request->name;
+        $email = $request->email;
+        $phone = $request->phone;
+        $cus_id = Session::get('customer_id');
+        $checkUser = DB::table('tbl_customers')
+            ->where([
+                'customer_id' => $cus_id,
+            ])->value('customer_name', 'customer_phone', 'customer_email');
+        //dd($checkUser==$password);
+        if ($email == $checkUser || $name == $checkUser || $phone == $checkUser) {
+            custommer::find($cus_id)->update([
+                'customer_name' =>$name,
+                'customer_phone' =>$phone,
+                'customer_email' =>$email
+
+            ]);
+            Session::flash('message', 'Thay đổi thông tin thành công');
+            return back();
+        } else {
+            return back()->with('error', 'Thay đổi thông tin thất bại');
+        }
+    }
+
     public function change_password(Request $request)
     {
         $com = '';
@@ -303,9 +343,9 @@ class ClientController extends Controller
         $cp = $request->confirm_password;
         $cus_id = Session::get('customer_id');
         $checkUser = DB::table('tbl_customers')
-        ->where([
-            'customer_id'=>$cus_id,
-        ])->value('customer_password');
+            ->where([
+                'customer_id' => $cus_id,
+            ])->value('customer_password');
         //dd($checkUser==$password);
         if ($np == $cp && $op == $checkUser) {
             custommer::find($cus_id)->update([
@@ -385,12 +425,8 @@ class ClientController extends Controller
         $rating = rating::where('product_id', '=', $id)->avg('rating');
         $rating = round($rating);
         $chinh = chinhsach::limit(3)->get();
-        $detail = DB::table('tbl_product')->join('tbl_category_product', 'tbl_category_product.category_id', '=', 'tbl_product.category_id')->where("tbl_product.product_id", $id)->get();
-
-
-
-
-
+        $detail = DB::table('tbl_product')->join('tbl_category_product', 'tbl_category_product.category_id', '=', 'tbl_product.category_id')
+            ->where("tbl_product.product_id", $id)->get();
         foreach ($detail as $key => $value) {
             $category_id = $value->category_id;
             $product_id = $value->product_id;
@@ -404,12 +440,6 @@ class ClientController extends Controller
         $del = product::where("product_id", $id)->first();
         $del->product_view = $del->product_view + 1;
         $del->save();
-
-
-
-        // $related_product = DB::table('tbl_product')
-        // ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
-        // ->where('tbl_category_product.category_id',$category_id)->whereNotIn('tbl_product.product_id',[$product_id])->orderby(DB::raw('RAND()'))->get();
         $related_product = Product::with('category')->where('category_id', $category_id)->whereNotIn('product_id', [$product_id])->get();
         return view('client/detail', compact(
             'detail',
@@ -463,11 +493,12 @@ class ClientController extends Controller
         Session::forget('customer_id');
         return redirect()->route('cli_index');
     }
+
     public function thankyou(Request $request)
     {
-        $meta_desc = "Cảm ơn";
+        $meta_desc = "Cảm ơn quý khách";
         // $meta_keywords = $value->product_slug;
-        $meta_title = "Cảm ơn";
+        $meta_title = "Cảm ơn quý khách";
         $cate_post1 = CatePost::orderBy('cate_post_id', 'DESC')->get();
         $url_canonical = $request->url();
         $share_images = url('images/' . $request->product_image);
