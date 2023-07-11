@@ -219,7 +219,7 @@
 						<span id="product_quickview_gallery"></span>
 
 					</div>
-					<form class="form3">
+					<form class="form3" method="POST" action="route{{'giohang'}}">
 						@csrf
 						<div id="product_quickview_value"></div>
 						<div class=" taice">
@@ -230,20 +230,24 @@
 							<br>
 							<?php /*<p class="nhanh" >@lang('lang.ProductPrice') : <span style="font-size: 20px; color: brown;font-weight: bold;" class="product_quickview_price"></span> (size: vừa)</p>*/ ?>
 
-							<label class="nhanh">@lang('lang.Amont'):</label>
-							<input type="number" class="soluong cart_product_sl" min=1 value="1" name="soluong">
+							<label class="nhanh">@lang('lang.Amont'):
+								<input type="number" class="soluong cart_product_sl" min=1 value="1" name="soluong">
 
-							</span>
+							</label>
+
+							<!-- <div class="cart_product_sl">
+								<span class="value-minus">-</span>
+								<span class="soluong cart_product_sl" id="product_quickview_quantity" name="quantity">1</span>
+								<span class="value-plus">+</span>
+							</div>
+							<input type="hidden" class="soluong" value=""> -->
+							<!-- <input type="hidden" class="soluong cart_product_sl" min=1 value="1" name="soluong"> -->
+
 							<p class="nhanh">@lang('lang.ProductDescription'):</p>
 							<!--  <hr> -->
 							<p><span id="product_quickview_desc"></span></p>
 							<hr>
 							<p><span id="product_quickview_content"></span></p>
-
-
-
-
-
 							<input type="hidden" name="sl">
 
 							<div style="margin-bottom: 10px" id="product_quickview_button"></div>
@@ -280,3 +284,23 @@
 	@endforeach
 </section>
 @endif
+<script>
+	const plus = document.querySelector(".value-plus"),
+		minus = document.querySelector(".value-minus"),
+		number = document.querySelector("#product_quickview_quantity")
+
+	let a = 1;
+	plus.addEventListener("click", () => {
+		a++;
+		number.innerText = a;
+		console.log(a);
+	})
+	minus.addEventListener("click", () => {
+		if (a > 1) {
+			a--;
+			number.innerText = a;
+			console.log(a);
+		}
+
+	})
+</script>

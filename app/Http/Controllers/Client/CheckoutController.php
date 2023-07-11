@@ -534,7 +534,7 @@ class  CheckoutController extends Controller
 
         if (!$checkUser) {
             return redirect()->back()->with('message', 'Không có email này');
-            //return dd("khp6g tồn tại");
+            //return dd("không tồn tại");
         }
         $code = bcrypt(md5(time() . $email));
         $checkUser->code = $code;
@@ -651,21 +651,21 @@ class  CheckoutController extends Controller
 
     public function callback_google()
     {
-        $users = Socialite::driver('google')->stateless()->user();
-        //dd($users); 
-        //return $users->id;
-        $authUser = $this->findOrCreateUser($users, 'google');
-        if ($authUser) {
-            $account_name = custommer::where('customer_id', $authUser->user)->first();
-            Session::put('customer_name', $account_name->customer_name);
-            Session::put('customer_id', $account_name->customer_id);
-            Session::put('fee', 15000);
-        } elseif ($customer_new) {
-            $account_name = custommer::where('customer_id', $authUser->user)->first();
-            Session::put('customer_name', $account_name->customer_name);
-            Session::put('customer_id', $account_name->customer_id);
-            Session::put('fee', 15000);
-        }
+        // $users = Socialite::driver('google')->stateless()->user();
+        // //dd($users); 
+        // //return $users->id;
+        // $authUser = $this->findOrCreateUser($users, 'google');
+        // if ($authUser) {
+        //     $account_name = custommer::where('customer_id', $authUser->user)->first();
+        //     Session::put('customer_name', $account_name->customer_name);
+        //     Session::put('customer_id', $account_name->customer_id);
+        //     Session::put('fee', 15000);
+        // } elseif ($customer_new) {
+        //     $account_name = custommer::where('customer_id', $authUser->user)->first();
+        //     Session::put('customer_name', $account_name->customer_name);
+        //     Session::put('customer_id', $account_name->customer_id);
+        //     Session::put('fee', 15000);
+        // }
 
         return redirect()->route('cli_index')->with('message', 'ĐĂNG NHẬP BẰNG TÀI KHOẢN GOOGLE THÀNH CÔNG');
     }

@@ -1543,10 +1543,11 @@ input#buy_quickview {
     text-transform: uppercase;
 }
 
-.quantity {
+.span quantity {
     background: white;
-    width: 40px;
     width: 50px;
+    height: 40px;
+    text-align: center;
 }
 
 .phi {
@@ -3409,22 +3410,27 @@ td.invert-image a img {
 /*-- quantity-starts --*/
 
 .value-minus,
+.quantity,
 .value-plus {
-    height: 40px;
+    height: 30px;
     line-height: 24px;
-    width: 40px;
+    width: 30px;
     margin-right: 3px;
     display: inline-block;
     cursor: pointer;
     position: relative;
     font-size: 18px;
-    color: #fff;
+    color: tomato;
     text-align: center;
     -webkit-user-select: none;
     -moz-user-select: none;
     border: 1px solid #b2b2b2;
     vertical-align: bottom;
 }
+
+
+
+
 
 .quantity-select .entry.value-minus:before,
 .quantity-select .entry.value-plus:before {
@@ -4431,6 +4437,7 @@ div#testimonials h4.m-title {
         min-height: 400px;
     }
 }
+
 
 @media(max-width: 736px) {
     .logo_agile {

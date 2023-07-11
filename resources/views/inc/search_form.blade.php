@@ -23,7 +23,7 @@
           $total += $sub; 
     ?>
 @endforeach
-<di	v id="wrapper">
+<div id="wrapper">
   <div class="cart-tab visible">  
      <div id="visible">
      </div>    
