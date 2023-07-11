@@ -1,7 +1,7 @@
 @extends('client/layout_cli')
 @section('content')
 @include('client.pop_up')
-	<title>VinaFood</title>
+<title>VinaFood</title>
 <div class="ads-grid py-sm-5 py-4">
 	<div class="container py-xl-4 py-lg-2">
 		<!-- tittle heading -->
@@ -79,12 +79,9 @@
 											<form>
 												@csrf
 												<fieldset>
-
 													<input type="button" data-toggle="modal" data-target="#xemnhanh" value="@lang('lang.quickview')" style="background: tomato" class="btn btn-default xemnhanh" data-id_soluong="{{$p->soluong}}" data-id_product="{{$p->product_id}}">
-
 												</fieldset>
 											</form>
-
 										</div>
 									</div>
 								</div>
@@ -107,50 +104,6 @@
 
 					</div>
 
-					<!-- <div class="run1 cach">
-
-						@foreach($toping as $t)
-						<?php
-
-						$gia = ($t->gia_km * 100) / $t->product_price;
-						$tong = 0;
-						if ($t->pro_rating) {
-							$tong = round(($t->pro_rating_number) / ($t->pro_rating));
-						}
-						$giatien = $t->product_price - $t->gia_km;
-
-						?>
-						@if($t->gia_km < $t->product_price && $t->gia_km >0)
-							<span class="badge badge-pill badge-danger ban">-{{ROUND($gia,1)}}%</span>
-							@endif
-							<a href="{{route('cli_detail',$t->product_id)}}">
-								<div class="baoca">
-									<div class="scale-img">
-										<img class="hi" src="{!! asset('images/'.$t->product_image)!!}" alt="">
-									</div>
-									<h4 class="text-center">
-										<a style="color:black; text-transform: uppercase; font-size:15px" href="{{route('cli_detail',$t->product_id)}}">{{$t->product_name}}</a>
-									</h4>
-									<p class="p-tien"><span class="item_price">{{number_format($giatien,0,'.','.')}} VNĐ</span>
-										@if($t->gia_km < $t->product_price && $t->gia_km > 0)
-											<del>{{$t->product_price}} VNĐ</del>
-											@endif</p>
-									<form>
-										@csrf
-										<fieldset>
-
-											<input type="button" data-toggle="modal" data-target="#xemnhanh" value="@lang('lang.quickview')" class="btn btn-default panhanh xemnhanh" data-id_soluong="{{$t->soluong}}" data-id_product="{{$t->product_id}}">
-
-										</fieldset>
-									</form>
-								</div>
-							</a>
-							@endforeach
-
-					</div> -->
-
-
-
 					<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3 sellchay1">@lang('lang.SelleingProduct')</h3>
 
 					<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
@@ -171,7 +124,6 @@
 													@endif
 													<img class="pro_img" src="{!! asset('images/'.$b->product_image)!!}" alt="">
 
-													<!--  -->
 
 											</div>
 										</a>
@@ -209,7 +161,7 @@
 											<span class="item_price">{{number_format($giatien,0,'.','.')}} VNĐ</span>
 											@if($b->gia_km < $b->product_price && $b->gia_km > 0)
 												<del>
-												{{number_format($b->product_price,0,'.','.')}} VNĐ
+													{{number_format($b->product_price,0,'.','.')}} VNĐ
 												</del>
 												@endif
 										</div>

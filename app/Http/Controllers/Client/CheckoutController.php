@@ -310,7 +310,7 @@ class  CheckoutController extends Controller
         Session::forget('coupon');
         // Session::forget('fee');
         Session::forget('cart');
-        Session::flash('thank', 'Cảm ơn bạn đã mua sản phẩm của chúng tôi, chúng tôi sẽ giao hàng sớm nhất cho bạn');
+        Session::flash('thank');
         return redirect()->route('thank');
     }
     public function confirm_order(Request $request)
@@ -419,9 +419,6 @@ class  CheckoutController extends Controller
         Session::forget('coupon');
         // Session::forget('fee');
         Session::forget('cart');
-        // return view('client/thankyou');
-        // Session::flash('thank','Cảm ơn bạn đã mua sản phẩm của chúng tôi, chúng tôi sẽ giao hàng sớm nhất cho bạn');
-        // return redirect()->route('cli_index');
     }
 
     //Đăng ký
@@ -613,6 +610,8 @@ class  CheckoutController extends Controller
     }
     public function payment(Request $request)
     {
+        $cus_id = Session::get('customer_id');
+        $cus = custommer::where('customer_id', $cus_id)->get();
         $url_canonical = $request->url();
         $meta_desc = "Thanh toán";
         // $meta_keywords = $value->product_slug;
@@ -622,10 +621,8 @@ class  CheckoutController extends Controller
         $share_images = url('images/' . $request->product_image);
         $cate = category::all();
         $com = '';
-        return view('client.payment', compact('cate', 'com', 'url_canonical', 'meta_title', 'meta_desc', 'share_images', 'cate_post1', 'chinh'));
+        return view('client.payment', compact('cate', 'com', 'url_canonical', 'meta_title', 'meta_desc', 'share_images', 'cate_post1', 'chinh', 'cus'));
     }
-
-
 
 
     public function checkout(Request $request)

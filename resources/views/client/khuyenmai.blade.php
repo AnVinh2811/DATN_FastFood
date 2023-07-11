@@ -111,6 +111,14 @@
 					</div>
 				</div>
 			</div>
+
+			<div class="col-md-6 product-men mt-5" id="home">
+				<div class="men-thumb-item text-center">
+					<div>
+						<a href="{{route('list_pro',['id'=>$cate->first()])}}"><img class="pro_img3" src="{{asset('web/images/cntnt7.jpg')}}" alt="" width=""></a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

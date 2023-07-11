@@ -102,6 +102,7 @@ use Illuminate\Support\Facades\Route;
  Route::get('/search', 'Admin\ProductController@tim');
  //profile
  Route::get('profile','Client\ClientController@profile')->name('profile');
+ Route::post('profile/update-profile','Client\ClientController@update_profile')->name('update_profile');
  Route::get('profile/change-password','Client\ClientController@change_password')->name('change_password');
  Route::post('profile/update-password','Client\ClientController@update_password')->name('update_password');
  //Route::post('profile/update-password','Client\ClientController@changePasswordSave')->name('update-password');

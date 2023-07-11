@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `trasua2`
+-- Cơ sở dữ liệu: `laravel`
 --
 
 -- --------------------------------------------------------
@@ -623,7 +623,7 @@ CREATE TABLE IF NOT EXISTS `tbl_infomation` (
 --
 
 INSERT INTO `tbl_infomation` (`info_id`, `info_contact`, `info_map`, `info_logo`, `info_fanpage`, `created_at`, `updated_at`) VALUES
-(1, '<p><span style=\"font-size:18px\">Địa chỉ: Tầng 3 số 102 Nơ Trang Long, P.13, Q.B&igrave;nh Thạnh, HCM</span></p>\r\n\r\n<p><span style=\"font-size:18px\">Email: TrasuaTeaMilk@gmail.com</span></p>\r\n\r\n<p><span style=\"font-size:18px\">Hotline: 0966342792 hoặc 0966342709</span></p>\r\n\r\n<p><span style=\"font-size:18px\">Website: http://google.com.vn.</span></p>', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.074425170947!2d106.69275991474917!3d10.80561179230171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c6b3087445%3A0x9f9e59544876ddf!2zMzU2LCA3IE7GoSBUcmFuZyBMb25nLCBwaMaw4budbmcgNywgQsOsbmggVGjhuqFuaCwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1625906869368!5m2!1svi!2s\" width=\"1250\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', 'gettyimages-1157712696-2048x204819.jpg', '<div id=\"fb-root\"></div>\r\n            <script async defer crossorigin=\"anonymous\" src=\"https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0&appId=2339123679735877&autoLogAppEvents=1\" nonce=\"2RfDRhZm\"></script>\r\n<div class=\"fb-page\" \r\ndata-tabs=\"timeline,events,messages\"\r\ndata-href=\"https://www.facebook.com/trasuafeelingtea/\"\r\ndata-width=\"380\" \r\ndata-hide-cover=\"false\"></div>', '2021-11-05 03:38:01', '2021-06-11 04:33:30');
+(1, '<p><span style=\"font-size:18px\">Địa chỉ: Tầng 3 số 102 Nơ Trang Long, P.13, Q.B&igrave;nh Thạnh, HCM</span></p>\r\n\r\n<p><span style=\"font-size:18px\">Email: VinaFood@gmail.com</span></p>\r\n\r\n<p><span style=\"font-size:18px\">Hotline: 0966342792 hoặc 0966342709</span></p>\r\n\r\n<p><span style=\"font-size:18px\">Website: http://google.com.vn.</span></p>', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.074425170947!2d106.69275991474917!3d10.80561179230171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c6b3087445%3A0x9f9e59544876ddf!2zMzU2LCA3IE7GoSBUcmFuZyBMb25nLCBwaMaw4budbmcgNywgQsOsbmggVGjhuqFuaCwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1625906869368!5m2!1svi!2s\" width=\"1250\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>', 'gettyimages-1157712696-2048x204819.jpg', '<div id=\"fb-root\"></div>\r\n            <script async defer crossorigin=\"anonymous\" src=\"https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v8.0&appId=2339123679735877&autoLogAppEvents=1\" nonce=\"2RfDRhZm\"></script>\r\n<div class=\"fb-page\" \r\ndata-tabs=\"timeline,events,messages\"\r\ndata-href=\"https://www.facebook.com/vinafood/\"\r\ndata-width=\"380\" \r\ndata-hide-cover=\"false\"></div>', '2021-11-05 03:38:01', '2021-06-11 04:33:30');
 
 -- --------------------------------------------------------
 
