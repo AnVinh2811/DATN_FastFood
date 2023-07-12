@@ -9,7 +9,7 @@
 
 <body>
 	<div class="loader hidden">
-		<!-- <img src="{!! asset('web/loading.gif')!!}" alt="Loading" width="300px" height="300px" style="border-radius: 100%;"> -->
+		<!-- <img src="{!! asset('web/loading-4.gif')!!}" alt="Loading" width="300px" height="300px" style="border-radius: 100%;"> -->
 	</div>
 	<!-- top-header -->
 

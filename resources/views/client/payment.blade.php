@@ -136,27 +136,39 @@
 						<span class="tongtien1" style="font-weight: bold;">@lang('lang.total'):</span>
 						<span class="tt">
 							@php
-							if(Session::get('fee') && !Session::get('coupon')){
+							if(Session::get('fee') && !Session::get('coupon'))
+							{
 							$total_after = $total_after_fee;
-							if($total>200000){
+							if($total>200000)
+							{
 							$total_after=$total_after_fee-Session::get('fee');
-							}else{
+							}
+							else
+							{
 							$total_after=$total_after_fee;
 							}
 							echo number_format($total_after,0,',','.').'VNĐ';
 
-							}elseif(Session::get('fee') && Session::get('coupon')){
+							}
+							elseif(Session::get('fee') && Session::get('coupon'))
+							{
 
 							$total_after = $total_after_coupon+Session::get('fee');
-							if($total>200000){
+
+							if($total>200000)
+							{
 							$total_after=$total_after-Session::get('fee');
 							}
 
 							echo number_format($total_after,0,',','.').' '.'VNĐ';
 
-							}elseif(!Session::get('fee') && !Session::get('coupon')){
+							}
+							elseif(!Session::get('fee') && !Session::get('coupon'))
+							{
 							$total_after = $total;
 							echo number_format($total_after,0,',','.').' '.'VNĐ';
+
+
 							}
 
 							@endphp
@@ -214,7 +226,7 @@
 										</div>
 										<div style="padding-top: 10px;
   													padding-left: 60px;">
-													Quận
+											Quận
 										</div>
 										<div class="controls2">
 											<select class="form-control shipping_address1" placeholder="Quận" name="shipping_address1">
@@ -248,7 +260,7 @@
 										<label for="exampleInputPassword1">@lang('lang.pick')</label>
 										<select name="payment_select" id="inputName" class="form-control input-sm m-bot15 payment_select">
 											<option value="1">Tiền mặt</option>
-											<option value="0">Qua chuyển khoản</option>
+											<option value="0">Thanh toán bằng mã QR</option>
 										</select>
 									</div>
 									@if(Session::get('fee'))
@@ -267,11 +279,21 @@
 
 
 								</div>
+								
 								@php
-								$vnd_to_usd=$total_after/23083;
+								$qrcode_total=$total_after;
 								@endphp
-								<div style="display: none;margin-left:108px" id="paypal-button" class="pay"></div>
-								<input type="hidden" id="vnd_to_usd" value="{{round($vnd_to_usd)}}">
+								<div style="display: none" id="paypal-button" class="pay">
+									<p class="qrcode_style">
+										{{QrCode::size(500)->generate($qrcode_total)}}
+									<p>Lưu ý: Mã QR này sẽ hết hạn sau 2 giờ kể từ lúc tạo</p>
+									<p>Sau khi thanh toán, nhấp vào nút bên dưới</p>
+									</p>
+									<br>
+									<input type="submit" style="background: #F24C3D; color: #fff" value="Tôi đã hoàn tất thanh toán trên App">
+								</div>
+								
+
 
 
 								<?php
@@ -296,7 +318,7 @@
 @stop
 
 
-
+<!-- 
 @section('payment')
 <script>
 	var usd = document.getElementById("vnd_to_usd").value;
@@ -374,4 +396,4 @@
 	}, '#paypal-button');
 </script>
 
-@endsection
+@endsection -->

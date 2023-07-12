@@ -92,7 +92,7 @@ class OrderController extends Controller
 				    <li><span class="tieu">Email: </span>' . $customer->customer_email . '</li>
 				  </ul>
 				</div>';
-		
+
 
 		$output['ship'] .= '
 		<div class="vc">
@@ -210,8 +210,8 @@ class OrderController extends Controller
         </tbody>
         </table>';
 
-	
-		
+
+
 		$output['in'] = '';
 		foreach ($getorder as $key => $or) {
 			if ($or->order_status == 1) {
@@ -219,10 +219,7 @@ class OrderController extends Controller
                 <option id="' . $or->order_id . '" selected value="1">Chưa xử lý</option>
                 <option id="' . $or->order_id . '" value="2">Xử lý đơn hàng</option>';
 			} elseif ($or->order_status == 2) {
-
-				$output['in'] .= '
-                
-                <option id="' . $or->order_id . '" selected value="2">Đơn hàng đã xử lý</option>';
+				$output['in'] .= '<option id="' . $or->order_id . '" selected value="2">Đơn hàng đã xử lý</option>';
 			} elseif ($or->order_status == 4) {
 				$output['in'] .= '<option id="' . $or->order_id . '" selected value="2">Đang vận chuyển</option>';
 			} elseif ($or->order_status == 3) {
@@ -276,6 +273,7 @@ class OrderController extends Controller
 		$cate = category::all();
 		$chinh = chinhsach::limit(3)->get();
 		$com = '';
+		
 		// $meta_title="giới thiệu";
 		// $meta_desc="trang chủ";
 		// $com='';

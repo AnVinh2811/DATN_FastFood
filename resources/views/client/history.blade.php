@@ -60,14 +60,18 @@
                   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 35%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">Đơn hàng mới</div>
                 </div>
                 @elseif ($ord->order_status==2)
-                <span style="color:green">Đã xử lý<i class="glyphicon glyphicon-check" style="margin-left:4px"></i></span>
                 <div class="progress">
                   <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 65%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Đơn hàng đã xử lý</div>
                 </div>
                 @elseif($ord->order_status==4)
                 <!-- <span style="color:#e6b70d;">Đơn hàng đang được vận chuyển<i class="glyphicon glyphicon-send" style="margin-left:6px"></i></span> -->
                 <div class="progress">
-                  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">Đơn hàng đã được vận chuyển</div>
+                  <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 80%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Đơn hàng đang được vận chuyển</div>
+                </div>
+                @elseif($ord->order_status==5)
+                <!-- <span style="color:#e6b70d;">Đơn hàng đang được vận chuyển<i class="glyphicon glyphicon-send" style="margin-left:6px"></i></span> -->
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">Đơn hàng đã giao</div>
                 </div>
                 @else
                 <!-- <span style="color:red">Đơn hàng đã hủy <i class="glyphicon glyphicon-ban-circle" style="margin-left:4px"></i></span> -->
