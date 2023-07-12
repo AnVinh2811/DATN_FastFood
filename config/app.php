@@ -180,7 +180,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Astrotomic\Translatable\TranslatableServiceProvider::class,
-
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
 
     ],
 
@@ -238,6 +238,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel'=> Maatwebsite\Excel\Facades\Excel::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
     ],
 
 ];

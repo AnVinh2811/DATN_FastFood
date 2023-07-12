@@ -1,6 +1,6 @@
 	<title>{{$meta_title}}</title>
 	<!-- Meta tag Keywords -->
-	<link rel="icon" type="images/x-icon" href="http://127.0.0.1:8000/web/images/logo1.png"/>
+	<link rel="icon" type="images/x-icon" href="http://127.0.0.1:8000/web/images/logo1.png" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8" />
 
@@ -92,3 +92,39 @@
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 	<!-- //web fonts -->
+
+	<!-- Search -->
+	<script>
+		const searchFocus = document.getElementById('search-focus');
+		const keys = [{
+				keyCode: 'AltLeft',
+				isTriggered: false
+			},
+			{
+				keyCode: 'ControlLeft',
+				isTriggered: false
+			},
+		];
+
+		window.addEventListener('keydown', (e) => {
+			keys.forEach((obj) => {
+				if (obj.keyCode === e.code) {
+					obj.isTriggered = true;
+				}
+			});
+
+			const shortcutTriggered = keys.filter((obj) => obj.isTriggered).length === keys.length;
+
+			if (shortcutTriggered) {
+				searchFocus.focus();
+			}
+		});
+
+		window.addEventListener('keyup', (e) => {
+			keys.forEach((obj) => {
+				if (obj.keyCode === e.code) {
+					obj.isTriggered = false;
+				}
+			});
+		});
+	</script>

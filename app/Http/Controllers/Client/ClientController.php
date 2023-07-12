@@ -294,9 +294,9 @@ class ClientController extends Controller
         //dd($checkUser==$password);
         if ($email == $checkUser || $name == $checkUser || $phone == $checkUser) {
             custommer::find($cus_id)->update([
-                'customer_name' =>$name,
-                'customer_phone' =>$phone,
-                'customer_email' =>$email
+                'customer_name' => $name,
+                'customer_phone' => $phone,
+                'customer_email' => $email
 
             ]);
             Session::flash('message', 'Thay đổi thông tin thành công');
@@ -464,6 +464,9 @@ class ClientController extends Controller
 
     public function search(Request $request)
     {
+        $meta_desc = "Kết quả tìm kiếm";
+        // $meta_keywords = $value->product_slug;
+        $meta_title = "Kết quả tìm kiếm";
         $size = attribute::where('name', 'size')->get();
         $hot = attribute::where('name', 'hot')->get();
         $url_canonical = $request->url();
@@ -474,10 +477,10 @@ class ClientController extends Controller
         $cate_post1 = CatePost::orderBy('cate_post_id', 'desc')->get();
         $com = '';
         $search = product::where('product_name', 'like', '%' . $key . '%')->get();
-        foreach ($search as $s) {
-            $meta_desc = $s->product_desc;
-            $meta_title = $s->product_name;
-        }
+        // foreach ($search as $s) {
+        //     $meta_desc = $s->product_desc;
+        //     $meta_title = $s->product_name;
+        // }
         $dem = count($search);
         if (count($search) > 0) {
             Session::flash('Message', 'Tìm thấy sản phẩm');

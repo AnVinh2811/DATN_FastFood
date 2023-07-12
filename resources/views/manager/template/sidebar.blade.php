@@ -64,8 +64,8 @@
                     
                   </li>
 
-                  <li><a href="{{URL::to('/all-category-post')}}"><i class="fa fa-bar-chart-o"></i> Danh mục bài viết </a>
-                  </li>
+                  <!-- <li><a href="{{URL::to('/all-category-post')}}"><i class="fa fa-bar-chart-o"></i> Danh mục bài viết </a>
+                  </li> -->
                   
                   <li><a href=" {{URL::to('/introduce')}}"><i class="fa fa-clone"></i>Giới thiệu</a>
                     

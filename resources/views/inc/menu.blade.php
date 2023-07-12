@@ -738,14 +738,13 @@
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark" style="background: #0000 !important;
-    position: relative;"  id="ftco-navbar">
+    position: relative;" id="ftco-navbar">
 
     <div class="container">
         <a class="navbar-brand" href="{{route('cli_index')}}">
             <img src="{!! asset('web/images/logo.png')!!}" alt="" width="400px" height="100px" class="img-fluid">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" 
-        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation" style="color: #000;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation" style="color: #000;">
             <span class="oi oi-menu"></span> Menu
         </button>
 
@@ -769,6 +768,5 @@
                 <?php } ?>
             </ul>
         </div>
-        
     </div>
 </nav>

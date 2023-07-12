@@ -16,7 +16,8 @@
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
-        "maatwebsite/excel": "*"
+        "maatwebsite/excel": "*",
+        "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

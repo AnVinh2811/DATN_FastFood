@@ -588,7 +588,7 @@ class  CheckoutController extends Controller
             'code' => $code,
             'customer_email' => $email
         ])->first();
-        
+
         if (!$checkUser) {
             return redirect('cli_index')->with('error', 'Xin lỗi, đường dẫn không đúng, xin vui lòng thử lại');
         } else {

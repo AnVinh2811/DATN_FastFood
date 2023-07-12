@@ -291,7 +291,7 @@ body a {
 
 
 .loader.hidden {
-    animation: fade 1.5s;
+    animation: fade 0.5s;
     animation-fill-mode: forwards;
 
 }
