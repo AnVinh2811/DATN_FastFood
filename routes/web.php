@@ -43,6 +43,7 @@ Route::group(['prefix' => 'cli', 'namespace' => 'Client'], function () {
    Route::get('/delivery', 'CheckoutController@delivery');
    Route::post('/select-delivery-home', 'CheckoutController@select_delivery_home');
    Route::get('/checkout', 'CheckoutController@checkout')->name('checkout');
+   Route::get('/online_checkout', 'CheckoutController@checkout')->name('online_checkout');
    Route::post('/load-comment', 'ClientController@load_comment');
    Route::post('/send-comment', 'ClientController@send_comment');
    Route::get('/gioithieu', 'ClientController@gioithieu')->name('gioithieu');
@@ -80,6 +81,9 @@ Route::post('/calculate-fee', 'Client\CheckoutController@calculate_fee');
 Route::get('/del-fee', 'Client\CheckoutController@del_fee');
 Route::post('/confirm-order', 'Client\CheckoutController@confirm_order');
 Route::post('/confirm-order1', 'Client\CheckoutController@confirm_order1');
+// Route::post('online-checkout', 'Client\CheckoutController@online_checkout');
+$route['/online-checkout']['POST']='Client\CheckoutController@online_checkout';
+
 Route::get('/thankyou', 'Client\ClientController@thankyou')->name('thank');
 Route::get('/history', 'Admin\OrderController@history');
 Route::get('/view-history-order/{order_code}', 'Admin\OrderController@view_history_order');
@@ -194,7 +198,7 @@ Route::post('/update-qty', 'Admin\OrderController@update_qty');
 Route::post('/huy-don-hang', 'Admin\OrderController@huy_don_hang');
 Route::get('/move/{code}', 'Admin\OrderController@move');
 Route::get('/success/{code}', 'Admin\OrderController@success');
-
+Route::get('/done/{code}', 'Admin\OrderController@done');
 
 ///////////////ATTRIBUTE/////////////
 Route::get('/attr', 'Admin\AttrController@add_attr')->name('add_attr')->middleware('check');

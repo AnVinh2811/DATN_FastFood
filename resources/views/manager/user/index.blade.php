@@ -25,7 +25,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="button">
-                  	<a href="{{URL::to('/add-users')}}" class="btn-color" type="button" >Thêm User</a>
+                  	<a href="{{URL::to('/add-users')}}" class="btn-color" type="button" >Thêm Admin</a>
                   </div>
                   
                   <div class="x_content">

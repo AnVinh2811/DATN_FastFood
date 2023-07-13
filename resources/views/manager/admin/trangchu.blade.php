@@ -134,9 +134,6 @@
               <th class="exp">
                 <p><i class="fa fa-square cus"></i>Đơn hàng đã xử lý </p>
               </th>
-              <!--  <th>
-                              <p><i class="fa fa-square red"></i>Others </p>
-                            </th> -->
 
             </tr>
 

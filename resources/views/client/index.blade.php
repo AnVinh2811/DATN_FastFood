@@ -97,7 +97,7 @@
 						<div class="row">
 							<div class="rundt wrap_1200">
 								@foreach($quangcao as $quang)
-								<a href="{{$quang->link}}"><img class="hinh" height="200px" src="{!! asset('uploads/quangcao/'.$quang->hinh_quangcao)!!}" alt=""></a>
+								<a><img class="hinh" height="200px" src="{!! asset('uploads/quangcao/'.$quang->hinh_quangcao)!!}" alt=""></a>
 								@endforeach
 							</div>
 						</div>
@@ -123,8 +123,6 @@
 													<span class="badge badge-pill badge-danger ban">-{{ROUND($gia,1)}}%</span>
 													@endif
 													<img class="pro_img" src="{!! asset('images/'.$b->product_image)!!}" alt="">
-
-
 											</div>
 										</a>
 
