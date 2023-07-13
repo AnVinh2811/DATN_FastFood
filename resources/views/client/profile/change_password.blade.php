@@ -15,8 +15,9 @@
                 <label>Mật Khẩu Hiện Tại</label>
                 <input type="password" name="old_password" id="old_password" class="form-control" 
                 placeholder="Mật khẩu cũ" required="">
+                @if($errors->any('new_password'))
                 <span class="text-danger"> {{$errors->first('old_password')}}</span>
-                
+                @endif                
             </div>
         </div>
     </div>

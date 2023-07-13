@@ -31,7 +31,7 @@
 					</div>
 					<div class="item-info-product text-center border-top mt-4">
 						<h4 class="pt-1">
-							<a href="single.html">{{$s->product_name}}</a>
+							<a href="{{route('cli_detail',$s->product_id)}}">{{$s->product_name}}</a>
 						</h4>
 						<div class="info-product-price my-2">
 							<span class="item_price">{{number_format($s->product_price,0,'.','.')}} VNĐ</span>

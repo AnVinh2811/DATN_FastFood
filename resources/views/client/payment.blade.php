@@ -256,13 +256,15 @@
 											<textarea type="text" class="form-control shipping_notes" placeholder="@lang('lang.note')" name="shipping_notes" required=""></textarea>
 										</div>
 									</div>
-									<div class="form-group">
-										<label for="exampleInputPassword1">@lang('lang.pick')</label>
+									<form>
+										<label for="exampleInputPassword1" style="padding-bottom: 10px;">@lang('lang.pick')</label>
 										<select name="payment_select" id="inputName" class="form-control input-sm m-bot15 payment_select">
-											<option value="1">Tiền mặt</option>
-											<option value="0">Thanh toán bằng mã QR</option>
+											<option value="1">Thanh toán tiền mặt</option>
+											<option value="0">Thanh toán ngân hàng</option>
 										</select>
-									</div>
+									</form>
+
+
 									@if(Session::get('fee'))
 									<input type="hidden" name="order_fee" class="order_fee" value="{{Session::get('fee')}}">
 									@else
@@ -279,21 +281,13 @@
 
 
 								</div>
-								
-								@php
-								$qrcode_total=$total_after;
-								@endphp
-								<div style="display: none" id="paypal-button" class="pay">
-									<p class="qrcode_style">
-										{{QrCode::size(500)->generate($qrcode_total)}}
-									<p>Lưu ý: Mã QR này sẽ hết hạn sau 2 giờ kể từ lúc tạo</p>
-									<p>Sau khi thanh toán, nhấp vào nút bên dưới</p>
-									</p>
-									<br>
-									<input type="submit" style="background: #F24C3D; color: #fff" value="Tôi đã hoàn tất thanh toán trên App">
-								</div>
-								
 
+								<div style="display: none" id="paypal-button" class="pay">
+									<form action="{{url('/online-checkout')}}" method="POST">
+									<input type="submit" value="Thanh toán MoMo" class="btn btn-danger" style="width: 100%; height: 50px; background: #D82D8B;" name="payUrl">
+									<input type="submit" value="Thanh toán VNPAY" class="btn btn-danger" style="width: 100%; height: 50px;" name="redirect">
+									</form>
+								</div>
 
 
 								<?php
@@ -306,7 +300,6 @@
 						</div>
 					</form>
 					@endforeach
-
 				</div>
 			</div>
 		</div>
@@ -316,84 +309,3 @@
 
 
 @stop
-
-
-<!-- 
-@section('payment')
-<script>
-	var usd = document.getElementById("vnd_to_usd").value;
-
-	paypal.Button.render({
-		// Configure environment
-		env: 'sandbox',
-		client: {
-			sandbox: 'Ab8KqcPUUPbWQ56VrEdNTx6lG9LBFIbGluG_YbAZyAwwCyR0jN0mxEgdyOYPPz2Hot-BCCh31HvpxpJu',
-			production: 'demo_production_client_id'
-		},
-		// Customize button (optional)
-		locale: 'en_US',
-		style: {
-			size: 'large',
-			color: 'gold',
-			shape: 'pill',
-		},
-
-		// Enable Pay Now checkout flow (optional)
-		commit: true,
-
-		// Set up a payment
-		payment: function(data, actions) {
-			return actions.payment.create({
-				transactions: [{
-					amount: {
-						total: `${usd}`,
-						currency: 'USD'
-					}
-				}]
-			});
-		},
-		// Execute the payment
-		onAuthorize: function(data, actions) {
-			return actions.payment.execute().then(function() {
-				// Show a confirmation message to the buyer
-				// window.alert('Thanh toán thành công!');
-				var shipping_email = $('.shipping_email').val();
-				var shipping_name = $('.shipping_name').val();
-				var shipping_address = $('.shipping_address').val();
-				var shipping_phone = $('.shipping_phone').val();
-				var shipping_notes = $('.shipping_notes').val();
-				var shipping_method = $('.payment_select').val();
-				var shipping_address1 = $('.shipping_address1').val();
-				var order_fee = $('.order_fee').val();
-				var order_coupon = $('.order_coupon').val();
-				var _token = $('input[name="_token"]').val();
-				$.ajax({
-					url: '{{url(' / confirm - order ')}}',
-					method: 'POST',
-					data: {
-						shipping_email: shipping_email,
-						shipping_name: shipping_name,
-						shipping_address: shipping_address,
-						shipping_phone: shipping_phone,
-						shipping_address1: shipping_address1,
-						shipping_notes: shipping_notes,
-						_token: _token,
-						order_fee: order_fee,
-						order_coupon: order_coupon,
-						shipping_method: shipping_method
-					},
-					success: function(data) {
-						alert('Thanh toán thành công');
-						window.location = '{{url(' / thankyou ')}}';
-					}
-
-				});
-
-			});
-
-		}
-
-	}, '#paypal-button');
-</script>
-
-@endsection -->

@@ -25,7 +25,6 @@
                 </div>
 
                 <div class="col-md-12">
-                    <p style="color:#fff; font-size: 17px; ">Bạn hoặc ai đó vừa đăng ký dịch vụ tại shop với thông tin như sao:</p>
                     <h4 style="color:#000; text-transform: uppercase;">Thông tin đơn hàng</h4>
                     <p>Mã đơn hàng: <strong style="text-transform:uppercase; color:#FFF">{{$code['order_code']}}</strong></p>
                     <p>Mã khuyến mãi: <strong style="text-transform:uppercase; color:#fff">{{$code['coupon_code']}}</strong></p>
@@ -78,10 +77,11 @@
                     </p>
                     <p style="color: #FFF;">Nếu thông tin người nhận hàng không có chúng tôi sẽ liên hệ với người đặt hàng để trao đổi về thông tin đơn hàng đã đặt </p>
                     <h4 style="text-transform:uppercase; color:#000">Sản phẩm đã đặt</h4>
-                    <table class="table table-striped" style="border: 1px;">
-                        <thead>
+                    <table class="table table-striped">
+                        <thead class="dau">
                             <tr>
                                 <th>Sản phẩm</th>
+                                <th>Size</th>
                                 <th>Giá tiền</th>
                                 <th>Số lượng</th>
                                 <th>Thành tiền</th>
@@ -107,10 +107,11 @@
                             $sub=$km*$cart['product_qty'];
                             }
 
-                            $total = $shipping_array['free'] + $sub;
+                            $total += $sub;
                             @endphp
                             <tr>
                                 <td>{{$cart['product_name']}}</td>
+                                <td>{{$cart['product_size']}}</td>
                                 <td>{{number_format($sub,0,',','.')}} VNĐ</td>
                                 <td style="text-align: center;">{{$cart['product_qty']}}</td>
                                 <td>{{number_format($sub,0,',','.')}} VNĐ</td>
@@ -133,28 +134,30 @@
                                     @endif
                                 </td>
                             </tr>
+                           
                             <tr>
 
-                                @if($sub > 200000)
+                                @if($code['order_code'] = 0)
                                 @php
 
                                 $shipping_array['free'] = 0;
-                                $total =$sub + $shipping_array['free']
-
+                                $total_after_ship =$total + $shipping_array['free']
                                 @endphp
 
                                 @else
                                 @php
-                                $total =$sub + $shipping_array['free'];
+                                $total_after_ship = $total + $shipping_array['free']
                                 @endphp
                                 @endif
-                                <td colspan="4" align="rigth">Tổng thanh toán: {{number_format($total,0,',','.')}}VND</td>
+                                <td colspan="4" align="rigth">Tổng thanh toán: {{number_format($total_after_ship,0,',','.')}} VNĐ
+
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <p style="color:#FFF">Mọi chi tiết xin liên hệ website tại: <a target="_blank" href="http://localhost/TeaMilk/public/cli/index">shop</a>, hoặc liên hệ qua hotline:19005689, Xin cảm ơn quý khác đã đặt hàng tại shop chúng tôi.</p>
+                <p style="color:#FFF">Mọi chi tiết xin liên hệ qua <a target="_blank" href="http://127.0.0.1:8000/cli/index">Website</a>, hoặc liên hệ qua hotline:19005689, Xin cảm ơn quý khác đã đặt hàng tại shop chúng tôi.</p>
             </div>
         </div>
     </div>

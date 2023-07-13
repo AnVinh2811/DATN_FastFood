@@ -25,7 +25,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Số điện thoại</label>
-                <input type="phone" name="phone" class="form-control" value="{{$c->customer_phone}}" placeholder="Số điện thoại" required>
+                <input type="phone" name="phone" class="form-control" value="{{$c->customer_phone}}" placeholder="Số điện thoại" >
             </div>
         </div>
 

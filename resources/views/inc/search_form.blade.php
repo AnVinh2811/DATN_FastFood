@@ -13,7 +13,7 @@
               {{csrf_field()}}
               <input class="form-control mr-sm-2" type="search" placeholder="Hôm nay bạn ăn gì..." aria-label="Search" name="keyword" id="keywords" required>
               <div id="search_ajax"></div>
-              <button class="btn my-2 my-sm-0" type="submit" style="background: #F2BE22;">@lang('lang.seach')
+              <button class="btn my-2 my-sm-0" type="submit" style="background: #F2BE22;"> <i class="fas fa-search"></i>
               </button>
             </form>
           </div>
