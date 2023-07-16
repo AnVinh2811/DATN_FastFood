@@ -258,9 +258,7 @@ class AdminController extends Controller
             $invoice->total_mount = $subtotal;
             $invoice->save();
         }
-        //$totalCost=product::with('orderDetail')->get();
-
-        // dd($detail);
+        
         $revenueByMonth = Order::where('order_status', 5)
             ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(total_mount) as revenue'))
             ->groupBy('month')
@@ -272,37 +270,7 @@ class AdminController extends Controller
             //dd($total);
         }
 
-        // $totalCost = OrderDetail::join('tbl_order_details', 'tbl_order_details.order_id', '=', 'tbl_order.order_id')
-        //      ->join('tbl_product', 'tbl_product.product_id', '=', 'tbl_order_details.product_id')
-        //      ->select('tbl_order.*', 'tbl_order_details.product_sales_quantity', 'tbl_product.price_cost')
-        //      ->get();
-        
-        // foreach ($totalCost as $item) {
-        //    // dd($totalCost);
-        //   $orderCost = 0;
-          
-        //   foreach ($item->orderDetail as $detail) {
-        //     //dd($item->orderDetail);
-        //     $orderCost += $detail->product_sales_quantity * $detail->price_cost;
-        // //     $orderCost->save();
-
-        //     $totalCost->profit = $orderCost;
-            
-        //   }
-        // }
-        // $profitByMonth = DB::table('tbl_order')->where('order_status', 5)
-        //     ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(profit) as profit'))
-        //     ->groupBy('month')
-        //     ->orderBy('month')
-        //     ->get();
-
-        // foreach ($profitByMonth as $ord) {
-
-        //     $cost = $ord->profit;
-        //     //dd($cost);
-        // }
-        // // dd($orderCost);
-         $profit = $total - 645000;
+        $profit = $total - 45000;
 
         // dump($profit);
         $viewData = array(

@@ -219,9 +219,6 @@ class  CheckoutController extends Controller
         }
         
         $invoices = Order::with('OrderDetail')->get();
-        
-        
-        
        
         foreach ($invoices as $invoice) {
             $totalAmount = 0;
@@ -240,7 +237,7 @@ class  CheckoutController extends Controller
             }
             //dd($orderCost);
             // lưu tổng tiền vào cột "total_amount" trong bảng invoices
-            $invoice->total_amount = $subtotal;
+            $invoice->total_mount = $subtotal;
             $invoice->save();
         }
         //vận chuyển
@@ -270,7 +267,7 @@ class  CheckoutController extends Controller
         $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
         $order->order_date = $order_date;
         $order->created_at = $today;
-        $order->total_amount = $subtotal;
+        $order->total_mount = $subtotal;
         $order->save();
         $order_id = $order->order_id;
 
