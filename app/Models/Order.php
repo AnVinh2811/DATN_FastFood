@@ -10,11 +10,14 @@ class Order extends Model
     use HasFactory;
     public $timestamps = false; //set time to false
     protected $fillable = [
-    	'customer_id', 'shipping_id', 'order_status','order_code','order_date','created_at'
+    	'customer_id', 'shipping_id', 'order_status','order_code','order_date','created_at','total_mount'
     ];
     protected $primaryKey = 'order_id';
  	protected $table = 'tbl_order';
     public function shipping(){
         return $this->belongsTo('App\Models\shipping','shipping_id');
+    }
+    public function OrderDetail(){
+        return $this->hasMany('App\Models\OrderDetail','order_id');
     }
 }

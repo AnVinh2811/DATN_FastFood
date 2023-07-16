@@ -2,40 +2,40 @@
 @section('content')
 <div class="right_col" role="main">
 
-  <div class="row" style="display: inline-block; width: 100%;text-align: center;">
-    <div class="tile_count">
-      <div class="col-md-2 col-sm-4  tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Tổng Users</span>
-        <div class="count">{{$app_admin}}</div>
-        <!-- <span class="count_bottom"><i class="green">4% </i> From last Week</span -->
-      </div>
-      <div class="col-md-2 col-sm-4  tile_stats_count">
-        <span class="count_top"><i class="fa fa-clock-o"></i> Tổng đơn hàng</span>
-        <div class="count">{{$tongo}}</div>
-        <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
-      </div>
-      <div class="col-md-2 col-sm-4  tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Tổng khách hàng</span>
-        <div class="count green">{{$app_cus}}</div>
-        <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
-      </div>
-      <div class="col-md-2 col-sm-4  tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Tổng sản phẩm</span>
-        <div class="count">{{$app_product}}</div>
-        <!-- <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span> -->
-      </div>
-      <div class="col-md-2 col-sm-4  tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Doanh thu tháng này</span>
-        <div class="count">{{number_format($seles,0,'.','.')}}</div>
-        <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
-      </div>
-      <div class="col-md-2 col-sm-4  tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Lợi nhuận tháng này</span>
-        <div class="count">{{number_format($tong,0,'.','.')}}</div>
-        <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
-      </div>
+<div class="row" style="display: inline-block; width: 100%;text-align: center;">
+        <div class="tile_count">
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Tổng Users</span>
+                <div class="count">{{$totalAdmin}}</div>
+                <!-- <span class="count_bottom"><i class="green">4% </i> From last Week</span -->
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-clock-o"></i> Tổng đơn hàng</span>
+                <div class="count">{{$totalOrder}}</div>
+                <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Tổng khách hàng</span>
+                <div class="count green">{{$totalCustomer}}</div>
+                <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Tổng sản phẩm</span>
+                <div class="count">{{$totalProduct}}</div>
+                <!-- <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span> -->
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Doanh thu tháng này</span>
+                <div class="count">{{number_format($revenueByMonth,0,'.','.')}}</div>
+                <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
+            </div>
+            <div class="col-md-2 col-sm-4  tile_stats_count">
+                <span class="count_top"><i class="fa fa-user"></i> Lợi nhuận tháng này</span>
+                <div class="count">{{number_format($profit,0,'.','.')}}</div>
+                <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
+            </div>
+        </div>
     </div>
-  </div>
 
 
 
@@ -55,7 +55,7 @@
 
       <div class="col-md-2">
         <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
-
+        
       </div>
 
       <div class="col-md-2">
@@ -63,10 +63,10 @@
           Lọc theo:
           <select class="dashboard-filter form-control">
             <option>--Chọn--</option>
-            <!-- <option value="thang9">Trong tháng 9</option>
-            <option value="7ngay">7 ngày qua</option> -->
-            <option value="thangtruoc">tháng trước</option>
-            <option value="thangnay">tháng này</option>
+            <!-- <option value="thang9">Trong tháng 9</option>-->
+            <option value="7ngay">7 ngày qua</option>
+            <option value="thangtruoc">Tháng trước</option>
+            <option value="thangnay">Tháng này</option>
             <option value="365ngayqua">365 ngày qua</option>
           </select>
         </p>
@@ -82,37 +82,12 @@
 
 
   <div class="col-md-12" style="padding:20px 20px">
-    <div id="chart1" style="height: 250px;" width="1000px"></div>
+    <div id="chart1"></div>
   </div>
 
 
 
-  <div class="row">
-    <p class="title_thongke">THỐNG KÊ TRUY CẬP</p>
-
-    <table class="table table-bordered table-dark text-white">
-      <thead>
-        <tr>
-          <th scope="col">Đang online</th>
-          <th scope="col">Tổng tháng trước</th>
-          <th scope="col">Tổng tháng này</th>
-          <th scope="col">Tổng một năm</th>
-          <th scope="col">Tổng truy cập</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="color:white">{{$visitor_count}}</td>
-          <td style="color:white">{{$visitor_last_month_count}}</td>
-          <td style="color:white">{{$visitor_this_month_count}}</td>
-          <td style="color:white">{{$visitor_year_count}}</td>
-          <td style="color:white">{{$visitors_total}}</td>
-        </tr>
-
-      </tbody>
-    </table>
-
-  </div>
+  
 
   <div class="x_content">
     <div class="row">
@@ -200,6 +175,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">
+  
   chart60daysorder();
   var chart = new Morris.Bar({
 
@@ -209,8 +185,8 @@
     parseTime: false,
     hideHover: 'auto',
     xkey: 'period',
-    ykeys: ['order', 'sales', 'profit', 'quantity'],
-    labels: ['đơn hàng', 'doanh số', 'lợi nhuận', 'số lượng']
+    ykeys: [ 'sales'],
+    labels: ['Doanh số']
 
   });
 
@@ -251,11 +227,11 @@
   });
 
   $('#btn-dashboard-filter').click(function() {
-
     var _token = $('input[name="_token"]').val();
 
     var from_date = $('#datepicker').val();
     var to_date = $('#datepicker2').val();
+    // alert(to_date)
     if (from_date > to_date) {
       toastr.warning('ngày không hợp lệ, bạn hãy chọn ngày phù hợp');
     } else {
@@ -268,9 +244,9 @@
           to_date: to_date,
           _token: _token
         },
-        error: function(data) {
-          toastr.warning('không có dữ liệu');
-        },
+        // error: function(data) {
+        //   toastr.warning('không có dữ liệu');
+        // },
         success: function(data) {
           chart.setData(data);
         }
@@ -285,17 +261,11 @@
 <script type="text/javascript">
   $(function() {
     $("#datepicker").datepicker({
-      prevText: "Tháng trước",
-      nextText: "Tháng sau",
       dateFormat: "yy-mm-dd",
-      dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
       duration: "slow"
     });
     $("#datepicker2").datepicker({
-      prevText: "Tháng trước",
-      nextText: "Tháng sau",
       dateFormat: "yy-mm-dd",
-      dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
       duration: "slow"
     });
   });

@@ -173,7 +173,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <a href="{{ route('insert_coupon') }}">Thêm mã giảm giá<u></u></a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('list_coupon') }}">danh sách mã giảm giá<u></u></a>
+                                    <a href="{{ route('list_coupon') }}">Danh sách mã giảm giá<u></u></a>
                                 </li>
 
                             </ul>

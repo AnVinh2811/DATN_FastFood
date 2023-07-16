@@ -121,6 +121,85 @@ Route::get('cli/fetch_data', 'Client\ClientController@fetch_data');
 
 
 
+<<<<<<< HEAD
+=======
+ 
+ ///////////////ATTRIBUTE/////////////
+ Route::get('/attr','Admin\AttrController@add_attr')->name('add_attr')->middleware('check');
+ Route::post('/them_attr','Admin\AttrController@store_attr')->name('store_attr')->middleware('check');
+ Route::get('/delete-attr/{id}','Admin\AttrController@del_attr')->name('del_attr');
+ 
+ //////////////////LOGIN/////////////
+ 
+ Route::get('/register-auth','Admin\AuthController@register_auth')->name('regis');
+ Route::get('/login-auth','Admin\AuthController@login_auth')->name('login_auth');
+ Route::get('/logout-auth','Admin\AuthController@logout_auth')->name('logout_auth');
+ Route::post('/register','Admin\AuthController@register');
+ Route::post('/login1','Admin\AuthController@login1');
+ 
+ 
+ ////////////////ADMIN//////////////
+ 
+ Route::get('/delete-order/{order_code}','Admin\OrderController@order_code');
+ Route::get('/dashboard','Admin\AdminController@show_dashboard')->name('trangchu')->middleware('check');
+ Route::post('/dashboard-filter','Admin\AdminController@dashboard_filter');
+ Route::post('/filter-by-date','Admin\AdminController@filter_by_date');
+ Route::get('/order-date','Admin\AdminController@order_date');
+ Route::post('/days-order','Admin\AdminController@days_order');
+ Route::get('/404','Client\ClientController@error_page')->name('404_page');
+ Route::get('/admin','Admin\AdminController@dashboard');
+ 
+ /////////////////COUPONE//////////////
+ Route::post('/check-coupon','Client\CouponController@check_coupon');
+ Route::get('/unset-coupon','Client\CouponController@unset_coupon');
+ Route::get('/insert-coupon','Client\CouponController@insert_coupon')->name('insert_coupon')->middleware('check');
+ Route::get('/delete-coupon/{coupon_id}','Client\CouponController@delete_coupon')->name('delete_coupon')->middleware('check');
+ Route::get('/list-coupon','Client\CouponController@list_coupon')->name('list_coupon')->middleware('check');
+ Route::post('/insert-coupon-code','Client\CouponController@insert_coupon_code')->name('insert_coupon_code')->middleware('check');
+ 
+ 
+ /////////////////POST///////////////
+ 
+ Route::get('/add-post','Admin\PostController@add_post')->middleware('check');
+ Route::get('/all-post','Admin\PostController@all_post')->name('all_post')->middleware('check');
+ Route::get('/delete-post/{post_id}','Admin\PostController@delete_post')->middleware('check');
+ Route::get('/edit-post/{post_id}','Admin\PostController@edit_post')->middleware('check');
+ Route::post('/save-post','Admin\PostController@save_post')->middleware('check');
+ Route::post('/update-post/{post_id}','Admin\PostController@update_post')->middleware('check');
+ 
+ 
+ //////////////SLIDESHOW///////////////
+ 
+ Route::get('/manage-slider','Admin\SliderController@manage_slider')->name('manage_sli')->middleware('check');
+ Route::get('/add-slider','Admin\SliderController@add_slider')->name('add_sli')->middleware('check');
+ Route::get('/delete-slide/{slide_id}','Admin\SliderController@delete_slide')->middleware('check');
+ Route::post('/insert-slider','Admin\SliderController@insert_slider')->middleware('check');
+ Route::get('/unactive-slide/{slide_id}','Admin\SliderController@unactive_slide')->middleware('check');
+ Route::get('/active-slide/{slide_id}','Admin\SliderController@active_slide')->middleware('check');
+ 
+ ////////////////INFOMATION////////////////////
+ Route::get('/information','Client\ContactController@information' )->middleware('check');
+ Route::post('/save-info','Client\ContactController@save_info' )->middleware('check');
+ Route::post('/update-info/{info_id}','Client\ContactController@update_info')->middleware('check');
+ 
+ 
+ //////////////////CATEGORY POST//////////////////////
+ Route::get('/add-category-post','Admin\CategoryPost@add_category_post')->middleware('check');
+ Route::get('/all-category-post','Admin\CategoryPost@all_category_post')->name('all_cate_post')->middleware('check');
+ Route::get('/edit-category-post/{category_post_id}','Admin\CategoryPost@edit_category_post')->middleware('check');
+ Route::post('/save-category-post','Admin\CategoryPost@save_category_post')->middleware('check');
+ Route::post('/update-category-post/{cate_id}','Admin\CategoryPost@update_category_post')->middleware('check');
+ Route::get('/delete-category-post/{cate_id}','Admin\CategoryPost@delete_category_post')->middleware('check');
+ 
+ 
+ ///////////////QUANG CAO//////////////////
+ Route::get('/quangcao','Admin\AddvertisedController@addver')->name('list_addvertised')->middleware('check');
+ Route::get('/add_addvertised','Admin\AddvertisedController@add_addver')->name('add_addvertised')->middleware('check');
+ Route::get('/edit-addver/{id}','Admin\AddvertisedController@edit_q')->name('sua_quangcao')->middleware('check');
+ Route::post('/store','Admin\AddvertisedController@store')->name('store_addvertised')->middleware('check');
+ Route::get('/delete_addver/{id}','Admin\AddvertisedController@destroy')->name('del_addver')->middleware('check');
+ Route::post('/update_addver/{id}','Admin\AddvertisedController@update_addver')->name('update_addver')->middleware('check');
+>>>>>>> Hana
 
 
 

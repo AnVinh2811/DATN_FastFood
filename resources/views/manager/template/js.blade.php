@@ -214,7 +214,7 @@
                 var value = $(this).val();
                 $.ajax({
                     type: 'get',
-                    url:'{{url('/product/search')}}',
+                    url:"{{url('/product/search')}}",
                     data: {
                         search: value
                     },
@@ -308,7 +308,7 @@ $(document).ready(function(){
             {label:"Đơn hàng mới", value:<?php echo $new ?>},
             {label:"Đơn hàng đã bị hủy", value:<?php echo $destroy ?>},
             {label:"Đang vận chuyển", value:<?php echo $move ?>},
-           
+            {label:"Thành công", value:<?php echo $move ?>},
             {label:"Đơn hàng đã xử lý", value:<?php echo $process ?>} 
           ]
         });
@@ -360,7 +360,7 @@ $(document).ready(function(){
         // alert(order_qty);
         // alert(order_code);
         $.ajax({
-                url : '{{url('/update-qty')}}',
+                url : "{{url('/update-qty')}}",
 
                 method: 'POST',
 
@@ -415,7 +415,7 @@ $(document).ready(function(){
         if(j==0){
           
                 $.ajax({
-                        url : '{{url('/update-order-qty')}}',
+                        url : "{{url('/update-order-qty')}}",
                             method: 'POST',
                             data:{_token:_token, order_status:order_status ,order_id:order_id ,quantity:quantity, order_product_id:order_product_id},
                             success:function(data){
