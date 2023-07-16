@@ -121,8 +121,6 @@ Route::get('cli/fetch_data', 'Client\ClientController@fetch_data');
 
 
 
-<<<<<<< HEAD
-=======
  
  ///////////////ATTRIBUTE/////////////
  Route::get('/attr','Admin\AttrController@add_attr')->name('add_attr')->middleware('check');
@@ -199,7 +197,6 @@ Route::get('cli/fetch_data', 'Client\ClientController@fetch_data');
  Route::post('/store','Admin\AddvertisedController@store')->name('store_addvertised')->middleware('check');
  Route::get('/delete_addver/{id}','Admin\AddvertisedController@destroy')->name('del_addver')->middleware('check');
  Route::post('/update_addver/{id}','Admin\AddvertisedController@update_addver')->name('update_addver')->middleware('check');
->>>>>>> Hana
 
 
 
