@@ -7,11 +7,9 @@
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="{!! asset('web/js/slick.js')!!}"></script>
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script src="{!! asset('web/js/app.js')!!}"></script>
     <script src="{!! asset('layout_admin/admin/vendors/validator/validator.js')!!}"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> -->
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 
     <script>
@@ -268,6 +266,7 @@
                 $('form .alert').remove();
         }).prop('checked', false);
     </script>
+
     <script type="text/javascript">
         $('#fo').on('submit', function(e) {
             e.preventDefault();
@@ -275,11 +274,9 @@
             var full = window.location.href;
             var final = full + "&" + formData;
             window.location.href = final;
-
-
         })
     </script>
-    @yield('payment')
+
     <script>
         show_comment();
 
