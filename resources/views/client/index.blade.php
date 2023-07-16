@@ -17,13 +17,8 @@
 				<div class="wrapper">
 					<!-- first section -->
 					<div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
-
 						<div class="row" id="list-index">
-
 							@foreach($product as $p)
-
-
-
 							<div class="col-md-4 product-men mt-5">
 								<div class="men-pro-item simpleCart_shelfItem">
 									<div class="men-thumb-item text-center">
@@ -65,7 +60,8 @@
 									<div class="item-info-product text-center border-top mt-4">
 										<h4 class="pt-1">
 											<a href="{{route('cli_detail',$p->product_id)}}">{{$p->product_name}}</a>
-										</h4>
+										</h4><br>
+										<span class="loai" style="font-family:unset;font-weight: 700;">Đã bán: </span><span>{{$p->product_sold}}</span>
 										<?php
 										$giatien = $p->product_price - $p->gia_km
 										?>
@@ -152,6 +148,8 @@
 										<h4 class="pt-1">
 											<a href="{{route('cli_detail',$b->product_id)}}">{{$b->product_name}}</a>
 										</h4>
+										<br>
+										<span class="loai" style="font-family:unset;font-weight: 700;">Đã bán: </span><span>{{$b->product_sold}}</span>
 										<?php
 										$giatien = $b->product_price - $b->gia_km
 										?>

@@ -45,7 +45,7 @@
 				</form>
 				<p class="text-center dont-do mt-3">Bạn chưa có tài khoản?
 					<a href="#" data-toggle="modal" data-target="#exampleModal2">
-						@lang('lang.registration')</a> hoặc <a href="{{url('/login-google')}}">
+						@lang('lang.registration')</a> hoặc <a href="{{url('/redirect')}}">
 						<img width="10%" alt="Đăng nhập bằng google" src="{{asset('/google.png')}}">
 					</a>
 				</p>
