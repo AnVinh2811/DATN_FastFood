@@ -143,11 +143,11 @@
 								</div>
 							</div>
 
-							<!-- <p style="font-size: 20px;color:#000000">@lang('lang.danggia_sao')</p>
+							<p style="font-size: 20px;color:#000000">@lang('lang.danggia_sao')</p>
 							<ul class="list-inline rating" title="Average Rating">
 								@for($count=1; $count<=5; $count++) @php if($count<=$rating){ $color='color:#ffcc00;' ; } else { $color='color:#ccc;' ; } @endphp <li title="star_rating" id="{{$value->product_id}}-{{$count}}" data-index="{{$count}}" data-product_id="{{$value->product_id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer; {{$color}} font-size:30px;">&#9733;</li>
 									@endfor
-							</ul> -->
+							</ul>
 					</div>
 				</div>
 			</div>

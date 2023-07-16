@@ -136,27 +136,39 @@
 						<span class="tongtien1" style="font-weight: bold;">@lang('lang.total'):</span>
 						<span class="tt">
 							@php
-							if(Session::get('fee') && !Session::get('coupon')){
+							if(Session::get('fee') && !Session::get('coupon'))
+							{
 							$total_after = $total_after_fee;
-							if($total>200000){
+							if($total>200000)
+							{
 							$total_after=$total_after_fee-Session::get('fee');
-							}else{
+							}
+							else
+							{
 							$total_after=$total_after_fee;
 							}
 							echo number_format($total_after,0,',','.').'VNĐ';
 
-							}elseif(Session::get('fee') && Session::get('coupon')){
+							}
+							elseif(Session::get('fee') && Session::get('coupon'))
+							{
 
 							$total_after = $total_after_coupon+Session::get('fee');
-							if($total>200000){
+
+							if($total>200000)
+							{
 							$total_after=$total_after-Session::get('fee');
 							}
 
 							echo number_format($total_after,0,',','.').' '.'VNĐ';
 
-							}elseif(!Session::get('fee') && !Session::get('coupon')){
+							}
+							elseif(!Session::get('fee') && !Session::get('coupon'))
+							{
 							$total_after = $total;
 							echo number_format($total_after,0,',','.').' '.'VNĐ';
+
+
 							}
 
 							@endphp
@@ -214,7 +226,7 @@
 										</div>
 										<div style="padding-top: 10px;
   													padding-left: 60px;">
-													Quận
+											Quận
 										</div>
 										<div class="controls2">
 											<select class="form-control shipping_address1" placeholder="Quận" name="shipping_address1">
@@ -244,13 +256,15 @@
 											<textarea type="text" class="form-control shipping_notes" placeholder="@lang('lang.note')" name="shipping_notes" required=""></textarea>
 										</div>
 									</div>
-									<div class="form-group">
-										<label for="exampleInputPassword1">@lang('lang.pick')</label>
+									<form>
+										<label for="exampleInputPassword1" style="padding-bottom: 10px;">@lang('lang.pick')</label>
 										<select name="payment_select" id="inputName" class="form-control input-sm m-bot15 payment_select">
-											<option value="1">Tiền mặt</option>
-											<option value="0">Qua chuyển khoản</option>
+											<option value="1">Thanh toán tiền mặt</option>
+											<option value="0">Thanh toán ngân hàng</option>
 										</select>
-									</div>
+									</form>
+
+
 									@if(Session::get('fee'))
 									<input type="hidden" name="order_fee" class="order_fee" value="{{Session::get('fee')}}">
 									@else
@@ -267,11 +281,13 @@
 
 
 								</div>
-								@php
-								$vnd_to_usd=$total_after/23083;
-								@endphp
-								<div style="display: none;margin-left:108px" id="paypal-button" class="pay"></div>
-								<input type="hidden" id="vnd_to_usd" value="{{round($vnd_to_usd)}}">
+
+								<div style="display: none" id="paypal-button" class="pay">
+									<form action="{{url('/online-checkout')}}" method="POST">
+									<input type="submit" value="Thanh toán MoMo" class="btn btn-danger" style="width: 100%; height: 50px; background: #D82D8B;" name="payUrl">
+									<input type="submit" value="Thanh toán VNPAY" class="btn btn-danger" style="width: 100%; height: 50px;" name="redirect">
+									</form>
+								</div>
 
 
 								<?php
@@ -284,7 +300,6 @@
 						</div>
 					</form>
 					@endforeach
-
 				</div>
 			</div>
 		</div>
@@ -294,84 +309,3 @@
 
 
 @stop
-
-
-
-@section('payment')
-<script>
-	var usd = document.getElementById("vnd_to_usd").value;
-
-	paypal.Button.render({
-		// Configure environment
-		env: 'sandbox',
-		client: {
-			sandbox: 'Ab8KqcPUUPbWQ56VrEdNTx6lG9LBFIbGluG_YbAZyAwwCyR0jN0mxEgdyOYPPz2Hot-BCCh31HvpxpJu',
-			production: 'demo_production_client_id'
-		},
-		// Customize button (optional)
-		locale: 'en_US',
-		style: {
-			size: 'large',
-			color: 'gold',
-			shape: 'pill',
-		},
-
-		// Enable Pay Now checkout flow (optional)
-		commit: true,
-
-		// Set up a payment
-		payment: function(data, actions) {
-			return actions.payment.create({
-				transactions: [{
-					amount: {
-						total: `${usd}`,
-						currency: 'USD'
-					}
-				}]
-			});
-		},
-		// Execute the payment
-		onAuthorize: function(data, actions) {
-			return actions.payment.execute().then(function() {
-				// Show a confirmation message to the buyer
-				// window.alert('Thanh toán thành công!');
-				var shipping_email = $('.shipping_email').val();
-				var shipping_name = $('.shipping_name').val();
-				var shipping_address = $('.shipping_address').val();
-				var shipping_phone = $('.shipping_phone').val();
-				var shipping_notes = $('.shipping_notes').val();
-				var shipping_method = $('.payment_select').val();
-				var shipping_address1 = $('.shipping_address1').val();
-				var order_fee = $('.order_fee').val();
-				var order_coupon = $('.order_coupon').val();
-				var _token = $('input[name="_token"]').val();
-				$.ajax({
-					url: '{{url(' / confirm - order ')}}',
-					method: 'POST',
-					data: {
-						shipping_email: shipping_email,
-						shipping_name: shipping_name,
-						shipping_address: shipping_address,
-						shipping_phone: shipping_phone,
-						shipping_address1: shipping_address1,
-						shipping_notes: shipping_notes,
-						_token: _token,
-						order_fee: order_fee,
-						order_coupon: order_coupon,
-						shipping_method: shipping_method
-					},
-					success: function(data) {
-						alert('Thanh toán thành công');
-						window.location = '{{url(' / thankyou ')}}';
-					}
-
-				});
-
-			});
-
-		}
-
-	}, '#paypal-button');
-</script>
-
-@endsection

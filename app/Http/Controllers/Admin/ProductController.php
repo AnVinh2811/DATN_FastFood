@@ -56,53 +56,6 @@ class ProductController extends Controller
     }
     public function themsp(Request $req)
     {
-
-        // $this->validate($req, [
-        //     'ten'=>'required',
-        //     'mota'=>'required',
-        //     'gia' => 'required|numeric|min:4',
-        //     'gia_goc'=>'required|numeric|min:4',
-        //     'gia_km'=>'required|numeric',
-        //     'soluong'=>'required|numeric',
-        //     'hinh'=>'required',
-        //     'attr_id[]'=>'required'
-        // ],[
-        //     'ten.required'=>'+Ban chưa nhập tên ',
-        //     'mota.required'=>'+Ban chưa nhập mô tả ',
-        //     'gia.required'=>'+bạn chưa nhập giá ',
-        //     'gia.numeric'=>'+giá phải là số ',
-        //     'gia.min'=>'+giá tiền phải ít nhất 4 ký tự ',
-        //     'gia_km.required'=>'+Bạn chưa nhập giá khuyến mãi ',
-        //     'soluong.required'=>'+Bạn chưa nhập số lượng ',
-        //     'soluong.numeric'=>'+Số lượng phải là số ',
-        //     'hinh.required'=>'+Bạn chưa nhập hình ',
-        //     'gia_goc.required'=>'+chưa nhập giá gốc ',
-        //     'gia_goc.numeric'=>'+Giá gốc phải là số ',
-        //     'gia_km.required'=>'+chưa nhập giá khuyến mãi ',
-        //     'gia_km.numeric'=>'+giá khuyến mãi phải là số ',
-        //     //'attr_id[].required'=>'+Bạn chưa chọn size',
-
-        // ]);
-        // $product_price = filter_var($req->gia, FILTER_SANITIZE_NUMBER_INT);
-        // $price_cost = filter_var($req->gia_goc, FILTER_SANITIZE_NUMBER_INT);
-        // $km = filter_var($req->gia_km, FILTER_SANITIZE_NUMBER_INT);
-
-        // $product=new Product();
-        // $product->product_name=$req->ten;
-        // $product->category_id=$req->loai;
-        // $product->product_desc=$req->mota;
-        // $product->product_price=$product_price;
-        // $product->price_cost=$price_cost;
-        // $product->gia_km=$km;
-        // $product->product_status=$req->status;
-        // $product->soluong=$req->soluong;
-        // $product->product_image=$this->imageUpload($req);
-        // if($product->save()){
-        //     Session::flash('message','thêm sản phẩm thành công');
-        // }else{
-        //     Session::flash('message','thêm sản phẩm thất bại');
-        // }   
-
         $this->validate($req, [
             'ten' => 'required',
             'mota' => 'required',
@@ -138,19 +91,19 @@ class ProductController extends Controller
         $product->soluong = $req->soluong;
         $product->product_image = $this->imageUpload($req);
         if ($product->save()) {
-            Session::flash('message', 'thêm sản phẩm thành công');
+            Session::flash('message', 'Thêm sản phẩm thành công');
         } else {
-            Session::flash('message', 'thêm sản phẩm thất bại');
+            Session::flash('message', 'Thêm sản phẩm thất bại');
         }
 
-        //return redirect()->route('pro_index');
-        // foreach($req->attr_id as $value){
-        //     product_attr::create([
-        //         'product_id'=>$product->product_id,
-        //         'attr_id'=>$value
-        //     ]);
-        // }
         return redirect()->route('pro_index');
+        foreach($req->attr_id as $value){
+            product_attr::create([
+                'product_id'=>$product->product_id,
+                'attr_id'=>$value
+            ]);
+        }
+        // return redirect()->route('pro_index');
     }
     // public function edit($id){
     //     $cate=category::all();

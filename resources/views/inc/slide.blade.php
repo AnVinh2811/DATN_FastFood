@@ -2,7 +2,7 @@
     <div class="amazingslider" id="amazingslider-1">
         <ul class="amazingslider-slides">
             @foreach($slide as $s)
-            <li><a href="#" target="_blank" title=""><img src="{!! asset('uploads/slider/'.$s->slider_image)!!}" alt="" title="" /></a>
+            <li><a target="_blank" title=""><img src="{!! asset('uploads/slider/'.$s->slider_image)!!}" alt="" title="" /></a>
             </li>
             @endforeach
         </ul>

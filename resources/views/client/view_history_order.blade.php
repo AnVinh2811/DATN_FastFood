@@ -198,8 +198,7 @@
                   @php
 
                   $total_after_coupon = ($total*$coupon_number)/100;
-
-                  echo 'Tổng giảm: '.number_format($total_after_coupon,0,',','.').'</br>';
+                  echo 'Tổng Voucher giảm giá: '.number_format($total_after_coupon,0,',','.').' VNĐ'.'</br>';
 
                   if($total > 200000){
 
@@ -217,7 +216,7 @@
 
                   @php
 
-                  echo 'Tổng giảm: '.number_format($coupon_number,0,',','.').' VNĐ'.'</br>';
+                  echo 'Tổng Voucher giảm giá: '.number_format($coupon_number,0,',','.').' VNĐ'.'</br>';
 
                   if($total > 200000){
 
@@ -235,11 +234,11 @@
 
                   @if($total_coupon > 200000)
                  
-                  Phí ship : {{number_format($details->product_feeship,0,',','.')}} VNĐ
+                  Phí ship :  0 VNĐ (Đơn hàng trên 200.000 VNĐ)
 
                   @else
 
-                  @lang('lang.fee_s') : 0 VNĐ (Free ship cho đơn hàng trên 200.000 VND )
+                  Phí ship : {{number_format($details->product_feeship,0,',','.')}} VNĐ
 
                   @endif</br>
 

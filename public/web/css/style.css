@@ -291,7 +291,7 @@ body a {
 
 
 .loader.hidden {
-    animation: fade 1.5s;
+    animation: fade 0.5s;
     animation-fill-mode: forwards;
 
 }
@@ -1434,7 +1434,7 @@ input.btn.btn-default.xemnhanh:hover {
 }
 
 .coup {
-    width: 176px;
+    width: 200px;
 }
 
 .nutgiamgia {
@@ -2171,7 +2171,7 @@ h3.tittle-w3l span {
 }
 
 .checkout-left {
-    padding: 0 20px;
+    padding: 20px;
     background: white;
 }
 

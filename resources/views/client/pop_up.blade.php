@@ -4,7 +4,7 @@
 </button> -->
 
 <!-- Modal -->
-<div class="modal fade" id="banner_quangcao" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="right: 300px;">
+<div class="modal fade" id="banner_quangcao" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="right: 300px; ">
   <div class="modal-dialog modal-dialog-centered" role="document">
     
     <div class="modal-content" style="width: auto; background: #F2BE22;">

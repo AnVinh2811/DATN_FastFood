@@ -182,12 +182,13 @@
                 },
                 phone: {
                     required: true,
-                    equalTo: '#password'
+                    minlength: 10,
+                    maxlength: 10
                 },
             },
             messages: {
                 name: {
-                    required: 'Vui lòng nhậphọ và tên của bạn.',
+                    required: 'Vui lòng nhập họ và tên của bạn.',
                 },
                 email: {
                     required: 'Vui lòng nhập email của bạn.',
@@ -222,7 +223,7 @@
                 },
                 confirm_password: {
                     required: true,
-                    equalTo: '#password'
+                    equalTo: '#confirm_password'
                 },
             },
             messages: {
@@ -482,6 +483,8 @@
 
         });
     </script>
+
+    <!-- Search -->
     <script type="text/javascript">
         $('#keywords').keyup(function() {
             var query = $(this).val();
@@ -599,7 +602,7 @@
                 var order_coupon = $('.order_coupon').val();
                 var _token = $('input[name="_token"]').val();
                 if (shipping_name == '' || shipping_email == '' || shipping_address == '' || shipping_phone == '' || shipping_method == '' || shipping_address1 == '') {
-                    toastr.warning('làm ơn hoàn tất thông tin trước khi đặt');
+                    toastr.warning('Làm ơn hoàn tất thông tin trước khi đặt');
                 } else {
 
                     swal({

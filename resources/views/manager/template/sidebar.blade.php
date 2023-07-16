@@ -25,16 +25,16 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="{{URL::to('/trangchu')}}"><i class="fa fa-home"></i> Trang chủ </a>
+                  <!-- <li><a href="{{URL::to('/trangchu')}}"><i class="fa fa-home"></i> Trang chủ </a>
                     
-                  </li>
+                  </li> -->
                   <li><a href="{{route('pro_index')}}"><i class="fa fa-edit"></i> Sản phẩm</a>
                     
                   </li>
                   <li><a href="{{route('cate_index')}}"><i class="fa fa-desktop"></i> Loại sản phẩm </a>
                   </li>
                   @hasrole(['admin'])
-                  <li><a href="{{url('/users')}}"><i class="fa fa-table"></i> User</a>
+                  <li><a href="{{url('/users')}}"><i class="fa fa-table"></i> Admin</a>
                   </li>
                   @endhasrole
                   @hasrole(['admin'])
@@ -43,9 +43,9 @@
                   @endhasrole
                   <li><a href="{{URL::to('/manage-order')}}"><i class="fa fa-bar-chart-o"></i> Đơn hàng <span class="badge badge-success">{{Session::get('or-nu')}}</span></a>
                   </li>
-                  <li><a href="{{route('add_attr')}}"><i class="fa fa-clone"></i>Thuộc tính</a>
+                  <!-- <li><a href="{{route('add_attr')}}"><i class="fa fa-clone"></i>Thuộc tính</a>
                     
-                  </li>
+                  </li> -->
                   <li><a href="{{route('list_coupon')}}"><i class="fa fa-clone"></i>Mã giảm giá</a>
                     
                   </li>
@@ -60,12 +60,12 @@
                   <!-- <li><a href="{{URL::to('/all-post')}}"><i class="fa fa-clone"></i>Bài viết</a>
                     
                   </li> -->
-                  <li><a href="{{URL::to('/information')}}"><i class="fa fa-clone"></i>Thông tin website</a>
+                  <!-- <li><a href="{{URL::to('/information')}}"><i class="fa fa-clone"></i>Thông tin website</a>
                     
-                  </li>
+                  </li> -->
 
-                  <li><a href="{{URL::to('/all-category-post')}}"><i class="fa fa-bar-chart-o"></i> Danh mục bài viết </a>
-                  </li>
+                  <!-- <li><a href="{{URL::to('/all-category-post')}}"><i class="fa fa-bar-chart-o"></i> Danh mục bài viết </a>
+                  </li> -->
                   
                   <li><a href=" {{URL::to('/introduce')}}"><i class="fa fa-clone"></i>Giới thiệu</a>
                     
