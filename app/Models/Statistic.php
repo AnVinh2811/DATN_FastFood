@@ -14,4 +14,7 @@ class Statistic extends Model
     ];
     protected $primaryKey = 'id_statistical';
     protected $table = 'tbl_statistical';
+    public function Order(){
+        return $this->hasMany('App\Models\Order','order_code');
+    } 
 }

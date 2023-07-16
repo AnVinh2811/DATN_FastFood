@@ -3,194 +3,319 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin;
+use App\Models\attribute;
 use Illuminate\Http\Request;
-use App\Models\quanly;
+use App\Models\Order;
 use Carbon\Carbon;
 use App\Models\Visitor;
 use App\Models\product;
 use App\Models\Post;
-use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\custommer;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+
 class AdminController extends Controller
 {
-    public function index(){
-    	return view('admin/index');
+    public function dashboard()
+    {
+
+        $totalAdmin = admin::select('id')->count();
+        $totalOrder = Order::select('id')->count();
+        $totalCustomer = custommer::select('id')->count();
+        $totalProduct = product::select('id')->count();
+        
+        $invoices = Order::with('OrderDetail')->get();
+        foreach ($invoices as $invoice) {
+            //dd($invoices);
+            $totalAmount = 0;
+            foreach ($invoice->OrderDetail as $detail) {
+                //dd($invoice->OrderDetail);
+                $totalAmount += $detail->product_sales_quantity * $detail->product_price;
+                if ($detail->product_size == "Lớn") {
+                    $subtotal = ($totalAmount + (($totalAmount * 20) / 100));
+                } elseif ($detail->product_size == "Nhỏ") {
+                    $subtotal = ($totalAmount) - ($totalAmount * 20) / 100;
+                } else {
+                    $subtotal = ($totalAmount);
+                }
+                //dd($detail->product_price);
+            }
+
+            // lưu tổng tiền vào cột "total_amount" trong bảng invoices
+            $invoice->total_mount = $subtotal;
+            $invoice->save();
+        }
+        //$totalCost=product::with('orderDetail')->get();
+
+        // dd($detail);
+        $revenueByMonth = Order::where('order_status', 5)
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(total_mount) as revenue'))
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+        foreach ($revenueByMonth as $ord) {
+
+            $total = $ord->revenue;
+            //dd($total);
+        }
+
+        // $totalCost = Order::join('tbl_order_details', 'tbl_order_details.order_id', '=', 'tbl_order.order_id')
+        //     ->join('tbl_product', 'tbl_product.product_id', '=', 'tbl_order_details.product_id')
+        //     ->select('tbl_order.*', 'tbl_order_details.product_sales_quantity', 'tbl_product.price_cost')
+        //     ->get();
+        
+        // foreach ($totalCost as $item) {
+        //    // dd($totalCost);
+        //   $orderCost = 0;
+          
+        //   foreach ($item->orderDetail as $detail) {
+        //     //dd($item->orderDetail);
+        //     $orderCost += $detail->product_sales_quantity * $detail->price_cost;
+        // //     $orderCost->save();
+
+        //     $totalCost->profit = $orderCost;
+            
+        //   }
+        // }
+        // $profitByMonth = DB::table('tbl_order')->where('order_status', 5)
+        //     ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(profit) as profit'))
+        //     ->groupBy('month')
+        //     ->orderBy('month')
+        //     ->get();
+
+        // foreach ($profitByMonth as $ord) {
+
+        //     $cost = $ord->profit;
+        //     //dd($cost);
+        // }
+        // // dd($orderCost);
+         $profit = $total - 645000;
+
+        // dump($profit);
+        $viewData = array(
+            'totalAdmin' => $totalAdmin,
+            'totalOrder' => $totalOrder,
+            'totalCustomer' => $totalCustomer,
+            'totalProduct' => $totalProduct,
+            'revenueByMonth' => $total,
+            'profit' => $profit
+        );
+        return view('manager.admin.trangchu2', $viewData);
+    }
+    public function index()
+    {
+        return view('admin/index');
     }
 
     // public function index(){
     //     return view('manager/admin/index');
     // }
 
-    public function filter_by_date(Request $request){
+    public function filter_by_date(Request $request)
+    {
 
-    $data = $request->all();
+        $data = $request->all();
 
-    $from_date = $data['from_date'];
-    $to_date = $data['to_date'];
+        $from_date = $data['from_date'];
+        $to_date = $data['to_date'];
 
-    $get = quanly::whereBetween('order_date',[$from_date,$to_date])->orderBy('order_date','ASC')->get();
+        $get = Order::where('order_status', 5)
+        ->whereBetween('order_date', [$from_date, $to_date])->orderBy('order_date', 'ASC')->get();
 
 
-    foreach($get as $key => $val){
+        foreach ($get as $key => $val) {
 
-        $chart_data[] = array(
+            $chart_data[] = array(
 
-            'period' => $val->order_date,
-            'order' => $val->total_order,
-            'sales' => $val->sales,
-            'profit' => $val->profit,
-            'quantity' => $val->quantity
-        );
+                'period' => $val->order_date,
+                //'order' => $val->total_order,
+                'sales' => $val->total_mount,
+                //'profit' => $val->profit,
+               // 'quantity' => $val->quantity
+            );
+        }
+
+        echo $data = json_encode($chart_data);
     }
 
-    echo $data = json_encode($chart_data);  
 
-}
-    
-
-    public function dashboard_filter(Request $request){
-    $data = $request->all();
+    public function dashboard_filter(Request $request)
+    {
+        $data = $request->all();
 
         // $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-Y H:i:s');
-       // $tomorrow = Carbon::now('Asia/Ho_Chi_Minh')->addDay()->format('d-m-Y H:i:s');
-       // $lastWeek = Carbon::now('Asia/Ho_Chi_Minh')->subWeek()->format('d-m-Y H:i:s');
-       // $sub15days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(15)->format('d-m-Y H:i:s');
-       // $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(30)->format('d-m-Y H:i:s');
+        // $tomorrow = Carbon::now('Asia/Ho_Chi_Minh')->addDay()->format('d-m-Y H:i:s');
+        // $lastWeek = Carbon::now('Asia/Ho_Chi_Minh')->subWeek()->format('d-m-Y H:i:s');
+        // $sub15days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(15)->format('d-m-Y H:i:s');
+        // $sub30days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(30)->format('d-m-Y H:i:s');
 
-    $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-    $dau_thangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
-    $cuoi_thangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
-
-
-
-    $sub7days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->toDateString();
-    $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-
-    $dauthang9 = Carbon::now('Asia/Ho_Chi_Minh')->subMonth(2)->startOfMonth()->toDateString();
-    $cuoithang9 = Carbon::now('Asia/Ho_Chi_Minh')->subMonth(2)->endOfMonth()->toDateString();
+        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $dau_thangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $cuoi_thangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
 
 
-    $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
-    if($data['dashboard_value']=='7ngay'){
+        $sub7days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->toDateString();
+        $sub365days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
 
-        $get = quanly::whereBetween('order_date',[$sub7days,$now])->orderBy('order_date','ASC')->get();
+        $dauthang9 = Carbon::now('Asia/Ho_Chi_Minh')->subMonth(2)->startOfMonth()->toDateString();
+        $cuoithang9 = Carbon::now('Asia/Ho_Chi_Minh')->subMonth(2)->endOfMonth()->toDateString();
 
-    }elseif($data['dashboard_value']=='thangtruoc'){
 
-        $get = quanly::whereBetween('order_date',[$dau_thangtruoc,$cuoi_thangtruoc])->orderBy('order_date','ASC')->get();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
-    }elseif($data['dashboard_value']=='thangnay'){
+        if ($data['dashboard_value'] == '7ngay') {
 
-        $get = quanly::whereBetween('order_date',[$dauthangnay,$now])->orderBy('order_date','ASC')->get();
+            $get = Order::where('order_status', 5)
+            ->whereBetween('order_date', [$sub7days, $now])->orderBy('order_date', 'ASC')->get();
+        } elseif ($data['dashboard_value'] == 'thangtruoc') {
 
-    }elseif ($data['dashboard_value']=='thang9') {
+            $get = Order::where('order_status', 5)
+            ->whereBetween('order_date', [$dau_thangtruoc, $cuoi_thangtruoc])->orderBy('order_date', 'ASC')->get();
+        } elseif ($data['dashboard_value'] == 'thangnay') {
 
-        $get = quanly::whereBetween('order_date',[$dauthang9,$cuoithang9])->orderBy('order_date','ASC')->get();
+            $get = Order::where('order_status', 5)
+            ->whereBetween('order_date', [$dauthangnay, $now])->orderBy('order_date', 'ASC')->get();
+        } elseif ($data['dashboard_value'] == 'thang9') {
 
-    }else{
-        $get = quanly::whereBetween('order_date',[$sub365days,$now])->orderBy('order_date','ASC')->get();
+            $get = Order::where('order_status', 5)
+            ->whereBetween('order_date', [$dauthang9, $cuoithang9])->orderBy('order_date', 'ASC')->get();
+        } else {
+            $get =Order::where('order_status', 5)
+            ->whereBetween('order_date', [$sub365days, $now])->orderBy('order_date', 'ASC')->get();
+        }
+
+
+        foreach ($get as $key => $val) {
+
+            $chart_data[] = array(
+                'period' => $val->order_date,
+                //'order' => $val->total_order,
+                'sales' => $val->total_mount,
+                //'profit' => $val->profit,
+                //'quantity' => $val->quantity
+            );
+        }
+
+        echo $data = json_encode($chart_data);
     }
 
+    public function days_order()
+    {
+        $sub60days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(60)->toDateString();
 
-    foreach($get as $key => $val){
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
-        $chart_data[] = array(
-            'period' => $val->order_date,
-            'order' => $val->total_order,
-            'sales' => $val->sales,
-            'profit' => $val->profit,
-            'quantity' => $val->quantity
+        $get = Order::where('order_status', 5)
+        ->whereBetween('order_date', [$sub60days, $now])
+        ->orderBy('order_date', 'ASC')
+        ->get();
+        
+
+        foreach ($get as $key => $val) {
+            
+            $chart_data[] = array(
+                'period' => $val->order_date,
+                //'order' => $val->total_order,
+                'sales' => $val->total_mount,
+                //'profit' => $val->profit,
+                //'quantity' => $val->quantity
+            );
+        }
+
+        echo $data = json_encode($chart_data);
+    }
+
+    public function show_dashboard(Request $request)
+    {
+        $totalAdmin = admin::select('id')->count();
+        $totalOrder = Order::select('id')->count();
+        $totalCustomer = custommer::select('id')->count();
+        $totalProduct = product::select('id')->count();
+        $product_views = Product::orderBy('product_sold', 'DESC')->take(10)->get();
+        $post_views = Post::orderBy('post_views', 'DESC')->take(10)->get();
+
+        $invoices = Order::with('OrderDetail')->get();
+        foreach ($invoices as $invoice) {
+            //dd($invoices);
+            $totalAmount = 0;
+            foreach ($invoice->OrderDetail as $detail) {
+                //dd($invoice->OrderDetail);
+                $totalAmount += $detail->product_sales_quantity * $detail->product_price;
+                if ($detail->product_size == "Lớn") {
+                    $subtotal = ($totalAmount + (($totalAmount * 20) / 100));
+                } elseif ($detail->product_size == "Nhỏ") {
+                    $subtotal = ($totalAmount) - ($totalAmount * 20) / 100;
+                } else {
+                    $subtotal = ($totalAmount);
+                }
+                //dd($detail->product_price);
+            }
+
+            // lưu tổng tiền vào cột "total_amount" trong bảng invoices
+            $invoice->total_mount = $subtotal;
+            $invoice->save();
+        }
+        //$totalCost=product::with('orderDetail')->get();
+
+        // dd($detail);
+        $revenueByMonth = Order::where('order_status', 5)
+            ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(total_mount) as revenue'))
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+        foreach ($revenueByMonth as $ord) {
+
+            $total = $ord->revenue;
+            //dd($total);
+        }
+
+        // $totalCost = OrderDetail::join('tbl_order_details', 'tbl_order_details.order_id', '=', 'tbl_order.order_id')
+        //      ->join('tbl_product', 'tbl_product.product_id', '=', 'tbl_order_details.product_id')
+        //      ->select('tbl_order.*', 'tbl_order_details.product_sales_quantity', 'tbl_product.price_cost')
+        //      ->get();
+        
+        // foreach ($totalCost as $item) {
+        //    // dd($totalCost);
+        //   $orderCost = 0;
+          
+        //   foreach ($item->orderDetail as $detail) {
+        //     //dd($item->orderDetail);
+        //     $orderCost += $detail->product_sales_quantity * $detail->price_cost;
+        // //     $orderCost->save();
+
+        //     $totalCost->profit = $orderCost;
+            
+        //   }
+        // }
+        // $profitByMonth = DB::table('tbl_order')->where('order_status', 5)
+        //     ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(profit) as profit'))
+        //     ->groupBy('month')
+        //     ->orderBy('month')
+        //     ->get();
+
+        // foreach ($profitByMonth as $ord) {
+
+        //     $cost = $ord->profit;
+        //     //dd($cost);
+        // }
+        // // dd($orderCost);
+         $profit = $total - 645000;
+
+        // dump($profit);
+        $viewData = array(
+            'totalAdmin' => $totalAdmin,
+            'totalOrder' => $totalOrder,
+            'totalCustomer' => $totalCustomer,
+            'totalProduct' => $totalProduct,
+            'revenueByMonth' => $total,
+            'profit' => $profit,
+            'product_views'=>$product_views,
+            'post_views'=>$post_views
         );
+
+        return view('manager.admin.trangchu',$viewData);
     }
-
-    echo $data = json_encode($chart_data);
-
-}
-
-    public function days_order(){
-
-    $sub60days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(60)->toDateString();
-
-    $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-
-    $get = quanly::whereBetween('order_date',[$sub60days,$now])->orderBy('order_date','ASC')->get();
-
-
-    foreach($get as $key => $val){
-
-       $chart_data[] = array(
-        'period' => $val->order_date,
-        'order' => $val->total_order,
-        'sales' => $val->sales,
-        'profit' => $val->profit,
-        'quantity' => $val->quantity
-    );
-
-   }
-
-   echo $data = json_encode($chart_data);
-}
-
-    public function show_dashboard(Request $request){
-    $user_ip_address = $request->ip();  
-
-    $early_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
-
-    $end_of_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
-
-    $early_this_month = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
-
-    $oneyears = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
-
-    $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-
-        //total last month
-    $visitor_of_lastmonth = Visitor::whereBetween('date_visitor',[$early_last_month,$end_of_last_month])->get(); 
-    $visitor_last_month_count = $visitor_of_lastmonth->count();
-
-        //total this month
-    $visitor_of_thismonth = Visitor::whereBetween('date_visitor',[$early_this_month,$now])->get(); 
-    $visitor_this_month_count = $visitor_of_thismonth->count();
-
-        //total in one year
-    $visitor_of_year = Visitor::whereBetween('date_visitor',[$oneyears,$now])->get(); 
-    $visitor_year_count = $visitor_of_year->count();
-
-        //total visitors
-    $visitors = Visitor::all();
-    $visitors_total = $visitors->count();
-
-        //current online
-    $visitors_current = Visitor::where('ip_address',$user_ip_address)->get();  
-    $visitor_count = $visitors_current->count();
-
-    if($visitor_count<1){
-        $visitor = new Visitor();
-        $visitor->ip_address = $user_ip_address;
-        $visitor->date_visitor = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-        $visitor->save();
-    }
-
-        //total 
-    $product = Product::all()->count();
-    $post = Post::all()->count();
-    $order = Order::all()->count();
-    // $video = Video::all()->count();
-    $customer = Custommer::all()->count();
-
-    // $product_views = Product::orderBy('product_view','DESC')->take(10)->get();
-    $product_views=Product::orderBy('product_sold','DESC')->take(10)->get();
-    $post_views = Post::orderBy('post_views','DESC')->take(10)->get();
-    
-    
-
-    return view('manager.admin.trangchu',compact('visitors_total','visitor_count','visitor_last_month_count','visitor_this_month_count','visitor_year_count','order','customer','product','post','post_views','product_views'));
-   }
-
-
-
-    
-
 }

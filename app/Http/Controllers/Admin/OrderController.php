@@ -241,7 +241,7 @@ class OrderController extends Controller
 
 	public function history(Request $request)
 	{
-		$meta_desc = "Lịch sữ mua hàng";
+		$meta_desc = "Lịch sử mua hàng";
 		// $meta_keywords = $value->product_slug;
 		$meta_title = "Lịch sử mua hàng";
 		$cate_post1 = CatePost::orderBy('cate_post_id', 'DESC')->get();

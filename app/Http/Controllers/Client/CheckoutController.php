@@ -217,7 +217,32 @@ class  CheckoutController extends Controller
         } else {
             $coupon_email = "Không có sử dụng";
         }
-
+        
+        $invoices = Order::with('OrderDetail')->get();
+        
+        
+        
+       
+        foreach ($invoices as $invoice) {
+            $totalAmount = 0;
+          
+            foreach ($invoice->OrderDetail as $detail) {
+                $totalAmount += $detail->product_sales_quantity * $detail->product_price;
+                
+                if ($detail->product_size == "Lớn") {
+                    $subtotal = ($totalAmount + (($totalAmount * 20) / 100));
+                } elseif ($detail->product_size == "Nhỏ") {
+                    $subtotal = ($totalAmount) - ($totalAmount * 20) / 100;
+                } else {
+                    $subtotal = ($totalAmount);
+                }
+                
+            }
+            //dd($orderCost);
+            // lưu tổng tiền vào cột "total_amount" trong bảng invoices
+            $invoice->total_amount = $subtotal;
+            $invoice->save();
+        }
         //vận chuyển
         $shipping = new Shipping();
         $shipping->shipping_name = $data['shipping_name'];
@@ -243,6 +268,7 @@ class  CheckoutController extends Controller
         $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
         $order->order_date = $order_date;
         $order->created_at = $today;
+        $order->total_amount = $subtotal;
         $order->save();
         $order_id = $order->order_id;
 

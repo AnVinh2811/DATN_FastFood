@@ -16,5 +16,7 @@ class attribute extends Model
     	
     ];
     protected $primaryKey='attr_id';
-    
+    // public function attribute(){
+    //     return $this->hasMany(OrderDetail::class);
+    // }
 }

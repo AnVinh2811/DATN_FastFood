@@ -219,6 +219,7 @@ use Illuminate\Support\Facades\Route;
  Route::get('/order-date','Admin\AdminController@order_date');
  Route::post('/days-order','Admin\AdminController@days_order');
  Route::get('/404','Client\ClientController@error_page')->name('404_page');
+ Route::get('/admin','Admin\AdminController@dashboard');
  
  /////////////////COUPONE//////////////
  Route::post('/check-coupon','Client\CouponController@check_coupon');
