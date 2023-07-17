@@ -258,7 +258,7 @@ class AdminController extends Controller
             $invoice->total_mount = $subtotal;
             $invoice->save();
         }
-        $profit=
+        $profit=0;
 
         // dd($detail);
         $revenueByMonth = Order::where('order_status', 5)
