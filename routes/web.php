@@ -43,7 +43,6 @@ Route::group(['prefix' => 'cli', 'namespace' => 'Client'], function () {
    Route::get('/delivery', 'CheckoutController@delivery');
    Route::post('/select-delivery-home', 'CheckoutController@select_delivery_home');
    Route::get('/checkout', 'CheckoutController@checkout')->name('checkout');
-   Route::get('/online_checkout', 'CheckoutController@checkout')->name('online_checkout');
    Route::post('/load-comment', 'ClientController@load_comment');
    Route::post('/send-comment', 'ClientController@send_comment');
    Route::get('/gioithieu', 'ClientController@gioithieu')->name('gioithieu');
@@ -81,8 +80,8 @@ Route::post('/calculate-fee', 'Client\CheckoutController@calculate_fee');
 Route::get('/del-fee', 'Client\CheckoutController@del_fee');
 Route::post('/confirm-order', 'Client\CheckoutController@confirm_order');
 Route::post('/confirm-order1', 'Client\CheckoutController@confirm_order1');
-// Route::post('online-checkout', 'Client\CheckoutController@online_checkout');
-$route['/online-checkout']['POST']='Client\CheckoutController@online_checkout';
+Route::post('online-checkout', 'Client\CheckoutController@online_checkout');
+// $route['/online-checkout']['POST']='Client\CheckoutController@online_checkout';
 
 Route::get('/thankyou', 'Client\ClientController@thankyou')->name('thank');
 Route::get('/history', 'Admin\OrderController@history');
@@ -95,23 +94,17 @@ Route::get('/danh-muc-bai-viet/{id}', 'Admin\PostController@danh_muc_bai_viet')-
 Route::get('/bai-viet/{post_slug}', 'Admin\PostController@bai_viet');
 Route::get('/lien-he', 'Client\ContactController@lien_he');
 //dang nhap gg
-Route::get('/login-google', 'Client\CheckoutController@login_google');
-Route::get('/google/callback', 'Client\CheckoutController@callback_google');
-//dang nhap face
-Route::get('/login-facebook', 'Client\CheckoutController@login_facebook');
-Route::get('/customer/facebook/callback', 'Client\CheckoutController@callback_facebook');
-Route::get('/send-coupon/{condition}/{number}/{code}/{time}', 'Admin\MailController@send_mail')->name('send_mail');
-Route::get('/send-coupon-vip/{condition}/{number}/{code}/{time}', 'Admin\MailController@send_mail_vip')->name('send_mail_vip');
-Route::get('/mail-example', 'Admin\MailController@mail_example');
-Route::get('/send-mail', 'Admin\MailController@send')->name('send');
-Route::post('/product-tabs', 'Admin\CategoryController@product_tabs');
-Route::get('/search', 'Admin\ProductController@tim');
+// Route::get('/login-google', 'Client\CheckoutController@login_google');
+// Route::get('/google/callback', 'Client\CheckoutController@callback_google');
+
+Route::get('/redirect', 'SocialAuthController@redirect');
+Route::get('/google/callback', 'SocialAuthController@callback');
+
 //profile
 Route::get('profile', 'Client\ClientController@profile')->name('profile');
 Route::post('profile/update-profile', 'Client\ClientController@update_profile')->name('update_profile');
 Route::get('profile/change-password', 'Client\ClientController@change_password')->name('change_password');
 Route::post('profile/update-password', 'Client\ClientController@update_password')->name('update_password');
-//Route::post('profile/update-password','Client\ClientController@changePasswordSave')->name('update-password');
 //
 Route::post('show-cart', 'Client\ClientController@show');
 Route::post('shop', 'Client\ClientController@shopping');

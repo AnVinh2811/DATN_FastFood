@@ -272,6 +272,7 @@ class AdminController extends Controller
             //dd($total);
         }
 
+<<<<<<< HEAD
         
         if ($total <= 50000) {
             $profit = $total - 35000;
@@ -290,6 +291,10 @@ class AdminController extends Controller
         }elseif($total<=1500000){
             $profit = $total - 635000;
         }
+=======
+        $profit = $total - 45000;
+
+>>>>>>> main
         // dump($profit);
         $viewData = array(
             'totalAdmin' => $totalAdmin,
