@@ -25,7 +25,7 @@ class AdminController extends Controller
         $totalOrder = Order::select('id')->count();
         $totalCustomer = custommer::select('id')->count();
         $totalProduct = product::select('id')->count();
-        
+
         $invoices = Order::with('OrderDetail')->get();
         foreach ($invoices as $invoice) {
             //dd($invoices);
@@ -65,18 +65,18 @@ class AdminController extends Controller
         //     ->join('tbl_product', 'tbl_product.product_id', '=', 'tbl_order_details.product_id')
         //     ->select('tbl_order.*', 'tbl_order_details.product_sales_quantity', 'tbl_product.price_cost')
         //     ->get();
-        
+
         // foreach ($totalCost as $item) {
         //    // dd($totalCost);
         //   $orderCost = 0;
-          
+
         //   foreach ($item->orderDetail as $detail) {
         //     //dd($item->orderDetail);
         //     $orderCost += $detail->product_sales_quantity * $detail->price_cost;
         // //     $orderCost->save();
 
         //     $totalCost->profit = $orderCost;
-            
+
         //   }
         // }
         // $profitByMonth = DB::table('tbl_order')->where('order_status', 5)
@@ -91,7 +91,7 @@ class AdminController extends Controller
         //     //dd($cost);
         // }
         // // dd($orderCost);
-         $profit = $total - 645000;
+        $profit = $total - 645000;
 
         // dump($profit);
         $viewData = array(
@@ -122,7 +122,7 @@ class AdminController extends Controller
         $to_date = $data['to_date'];
 
         $get = Order::where('order_status', 5)
-        ->whereBetween('order_date', [$from_date, $to_date])->orderBy('order_date', 'ASC')->get();
+            ->whereBetween('order_date', [$from_date, $to_date])->orderBy('order_date', 'ASC')->get();
 
 
         foreach ($get as $key => $val) {
@@ -133,7 +133,7 @@ class AdminController extends Controller
                 //'order' => $val->total_order,
                 'sales' => $val->total_mount,
                 //'profit' => $val->profit,
-               // 'quantity' => $val->quantity
+                // 'quantity' => $val->quantity
             );
         }
 
@@ -169,22 +169,22 @@ class AdminController extends Controller
         if ($data['dashboard_value'] == '7ngay') {
 
             $get = Order::where('order_status', 5)
-            ->whereBetween('order_date', [$sub7days, $now])->orderBy('order_date', 'ASC')->get();
+                ->whereBetween('order_date', [$sub7days, $now])->orderBy('order_date', 'ASC')->get();
         } elseif ($data['dashboard_value'] == 'thangtruoc') {
 
             $get = Order::where('order_status', 5)
-            ->whereBetween('order_date', [$dau_thangtruoc, $cuoi_thangtruoc])->orderBy('order_date', 'ASC')->get();
+                ->whereBetween('order_date', [$dau_thangtruoc, $cuoi_thangtruoc])->orderBy('order_date', 'ASC')->get();
         } elseif ($data['dashboard_value'] == 'thangnay') {
 
             $get = Order::where('order_status', 5)
-            ->whereBetween('order_date', [$dauthangnay, $now])->orderBy('order_date', 'ASC')->get();
+                ->whereBetween('order_date', [$dauthangnay, $now])->orderBy('order_date', 'ASC')->get();
         } elseif ($data['dashboard_value'] == 'thang9') {
 
             $get = Order::where('order_status', 5)
-            ->whereBetween('order_date', [$dauthang9, $cuoithang9])->orderBy('order_date', 'ASC')->get();
+                ->whereBetween('order_date', [$dauthang9, $cuoithang9])->orderBy('order_date', 'ASC')->get();
         } else {
-            $get =Order::where('order_status', 5)
-            ->whereBetween('order_date', [$sub365days, $now])->orderBy('order_date', 'ASC')->get();
+            $get = Order::where('order_status', 5)
+                ->whereBetween('order_date', [$sub365days, $now])->orderBy('order_date', 'ASC')->get();
         }
 
 
@@ -209,13 +209,13 @@ class AdminController extends Controller
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
         $get = Order::where('order_status', 5)
-        ->whereBetween('order_date', [$sub60days, $now])
-        ->orderBy('order_date', 'ASC')
-        ->get();
-        
+            ->whereBetween('order_date', [$sub60days, $now])
+            ->orderBy('order_date', 'ASC')
+            ->get();
+
 
         foreach ($get as $key => $val) {
-            
+
             $chart_data[] = array(
                 'period' => $val->order_date,
                 //'order' => $val->total_order,
@@ -258,7 +258,7 @@ class AdminController extends Controller
             $invoice->total_mount = $subtotal;
             $invoice->save();
         }
-        //$totalCost=product::with('orderDetail')->get();
+        $profit=
 
         // dd($detail);
         $revenueByMonth = Order::where('order_status', 5)
@@ -272,38 +272,24 @@ class AdminController extends Controller
             //dd($total);
         }
 
-        // $totalCost = OrderDetail::join('tbl_order_details', 'tbl_order_details.order_id', '=', 'tbl_order.order_id')
-        //      ->join('tbl_product', 'tbl_product.product_id', '=', 'tbl_order_details.product_id')
-        //      ->select('tbl_order.*', 'tbl_order_details.product_sales_quantity', 'tbl_product.price_cost')
-        //      ->get();
         
-        // foreach ($totalCost as $item) {
-        //    // dd($totalCost);
-        //   $orderCost = 0;
-          
-        //   foreach ($item->orderDetail as $detail) {
-        //     //dd($item->orderDetail);
-        //     $orderCost += $detail->product_sales_quantity * $detail->price_cost;
-        // //     $orderCost->save();
-
-        //     $totalCost->profit = $orderCost;
-            
-        //   }
-        // }
-        // $profitByMonth = DB::table('tbl_order')->where('order_status', 5)
-        //     ->select(DB::raw('MONTH(created_at) as month'), DB::raw('SUM(profit) as profit'))
-        //     ->groupBy('month')
-        //     ->orderBy('month')
-        //     ->get();
-
-        // foreach ($profitByMonth as $ord) {
-
-        //     $cost = $ord->profit;
-        //     //dd($cost);
-        // }
-        // // dd($orderCost);
-         $profit = $total - 645000;
-
+        if ($total <= 50000) {
+            $profit = $total - 35000;
+        }elseif($total<=100000){
+            $profit = $total - 75000;
+        }elseif($total<=150000){
+            $profit = $total - 95000;
+        }elseif($total<=200000){
+            $profit = $total - 125000;
+        }elseif($total<=300000){
+            $profit = $total - 235000;
+        }elseif($total<=500000){
+            $profit = $total - 355000;
+        }elseif($total<=1000000){
+            $profit = $total - 715000;
+        }elseif($total<=1500000){
+            $profit = $total - 635000;
+        }
         // dump($profit);
         $viewData = array(
             'totalAdmin' => $totalAdmin,
@@ -312,10 +298,10 @@ class AdminController extends Controller
             'totalProduct' => $totalProduct,
             'revenueByMonth' => $total,
             'profit' => $profit,
-            'product_views'=>$product_views,
-            'post_views'=>$post_views
+            'product_views' => $product_views,
+            'post_views' => $post_views
         );
 
-        return view('manager.admin.trangchu',$viewData);
+        return view('manager.admin.trangchu', $viewData);
     }
 }
