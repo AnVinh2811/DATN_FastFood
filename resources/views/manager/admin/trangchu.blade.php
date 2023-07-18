@@ -185,8 +185,8 @@
     parseTime: false,
     hideHover: 'auto',
     xkey: 'period',
-    ykeys: [ 'sales'],
-    labels: ['Doanh số']
+    ykeys: [ 'sales','profit'],
+    labels: ['Doanh số','Lợi nhuận']
 
   });
 
@@ -233,7 +233,7 @@
     var to_date = $('#datepicker2').val();
     // alert(to_date)
     if (from_date > to_date) {
-      toastr.warning('ngày không hợp lệ, bạn hãy chọn ngày phù hợp');
+      toastr.warning('Ngày không hợp lệ, bạn hãy chọn ngày phù hợp');
     } else {
       $.ajax({
         url: "{{url('/filter-by-date')}}",
@@ -244,9 +244,9 @@
           to_date: to_date,
           _token: _token
         },
-        // error: function(data) {
-        //   toastr.warning('không có dữ liệu');
-        // },
+        error: function(data) {
+        toastr.warning('Không có dữ liệu');
+        },
         success: function(data) {
           chart.setData(data);
         }

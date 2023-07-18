@@ -132,7 +132,7 @@ class AdminController extends Controller
                 'period' => $val->order_date,
                 //'order' => $val->total_order,
                 'sales' => $val->total_mount,
-                //'profit' => $val->profit,
+                'profit' => $val->total_mount*15/100,
                 // 'quantity' => $val->quantity
             );
         }
@@ -194,7 +194,7 @@ class AdminController extends Controller
                 'period' => $val->order_date,
                 //'order' => $val->total_order,
                 'sales' => $val->total_mount,
-                //'profit' => $val->profit,
+                'profit' => $val->total_mount*15/100,
                 //'quantity' => $val->quantity
             );
         }
@@ -220,7 +220,7 @@ class AdminController extends Controller
                 'period' => $val->order_date,
                 //'order' => $val->total_order,
                 'sales' => $val->total_mount,
-                //'profit' => $val->profit,
+                'profit' => $val->total_mount*15/100,
                 //'quantity' => $val->quantity
             );
         }
@@ -258,7 +258,9 @@ class AdminController extends Controller
             $invoice->total_mount = $subtotal;
             $invoice->save();
         }
-        $profit=0;
+        //$price_cost=product::select('price_cost');
+        //dd($price_cost);
+        
 
         // dd($detail);
         $revenueByMonth = Order::where('order_status', 5)
@@ -271,30 +273,9 @@ class AdminController extends Controller
             $total = $ord->revenue;
             //dd($total);
         }
-
-<<<<<<< HEAD
+        $profit=15*$total/100;
         
-        if ($total <= 50000) {
-            $profit = $total - 35000;
-        }elseif($total<=100000){
-            $profit = $total - 75000;
-        }elseif($total<=150000){
-            $profit = $total - 95000;
-        }elseif($total<=200000){
-            $profit = $total - 125000;
-        }elseif($total<=300000){
-            $profit = $total - 235000;
-        }elseif($total<=500000){
-            $profit = $total - 355000;
-        }elseif($total<=1000000){
-            $profit = $total - 715000;
-        }elseif($total<=1500000){
-            $profit = $total - 635000;
-        }
-=======
-        $profit = $total - 45000;
-
->>>>>>> main
+        
         // dump($profit);
         $viewData = array(
             'totalAdmin' => $totalAdmin,
