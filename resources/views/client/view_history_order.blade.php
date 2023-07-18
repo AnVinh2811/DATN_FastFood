@@ -1,6 +1,26 @@
 @extends('client/layout_cli')
 @section('content')
 <title>Lịch sử đặt hàng</title>
+<div class="services-breadcrumb">
+  <div class="agile_inner_breadcrumb">
+    <div class="container">
+      <ul class="w3_short">
+        <li>
+          <a href="{{route('cli_index')}}">Home</a>
+          <i>|</i>
+        </li>
+        <li>
+          <a href="{{url('profile')}}">Thông tin cá nhân</a>
+          <i>|</i>
+        </li>
+        <li><a href="{{url('history')}}">Lịch sử đơn hàng</a>
+          <i>|</i>
+        </li>
+        <li>Chi tiết đơn hàng</li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div class="bao-all  ">
   <div class="baobang">
     <div class="table-agile-info left-table">
@@ -88,7 +108,7 @@
                 <td>{{$shipping->shipping_address}}</td>
                 <td>{{$shipping->shipping_phone}}</td>
                 <td>{{$shipping->shipping_notes}}</td>
-                <td>@if($shipping->shipping_method==0)<span class="online">Chuyển khoản</span> @else <span class="offline">Tiền mặt</span> @endif</td>
+                <td>@if($shipping->shipping_method==0)<span class="online">MOMO</span> @else <span class="offline">Tiền mặt</span> @endif</td>
 
 
               </tr>

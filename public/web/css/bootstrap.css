@@ -8165,7 +8165,7 @@ button.bg-dark:focus {
 .mb-2,
 .my-2 {
   margin-bottom: 0.5rem !important;
-  /* padding-top: 20px; */
+  padding-top: 20px;
 }
 
 .ml-2,

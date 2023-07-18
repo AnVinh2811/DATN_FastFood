@@ -157,7 +157,7 @@
                     </table>
                 </div>
 
-                <p style="color:#FFF">Mọi chi tiết xin liên hệ qua <a target="_blank" href="http://127.0.0.1:8000/cli/index">Website</a>, hoặc liên hệ qua hotline:19005689, Xin cảm ơn quý khác đã đặt hàng tại shop chúng tôi.</p>
+                <p style="color:#FFF">Mọi chi tiết xin liên hệ qua <a target="_blank" href="http://127.0.0.1:8000/cli/index">Website</a> hoặc liên hệ qua hotline: 0817500095, Xin cảm ơn quý khác đã đặt hàng tại shop chúng tôi.</p>
             </div>
         </div>
     </div>

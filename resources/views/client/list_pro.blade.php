@@ -152,8 +152,7 @@
 									<h4 class="pt-1">
 										<a href="{{route('cli_detail',$s1->product_id)}}">{{$s1->product_name}}</a>
 									</h4>
-									<br>
-									<span class="loai" style="font-family:unset;font-weight: 700;">Đã bán: </span><span>{{$s1->product_sold}}</span>
+									<br><br>
 									<?php
 									$giatien = $s1->product_price - $s1->gia_km
 									?>

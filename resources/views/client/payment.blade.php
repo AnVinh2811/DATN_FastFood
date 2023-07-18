@@ -75,6 +75,7 @@
 					</tbody>
 
 				</table>
+
 				<div class="tinhtien">
 					<div class="thanh_tien">
 						<span class="tien" style="font-weight: bold;">@lang('lang.provisional'):</span><span class="tt">{{number_format($total,0,',','.')}} VNĐ</span>
@@ -260,7 +261,7 @@
 										<label for="exampleInputPassword1" style="padding-bottom: 10px;">@lang('lang.pick')</label>
 										<select name="payment_select" id="inputName" class="form-control input-sm m-bot15 payment_select">
 											<option value="1">Thanh toán bằng tiền mặt</option>
-											<option value="0">Thanh toán bằng VNPAY</option>
+											<option value="0">Thanh toán bằng MOMO</option>
 										</select>
 									</form>
 
@@ -287,14 +288,16 @@
 										<!-- <button class="btn btn-danger" name="redirect" style="width: 100%; height: 50px;">Thanh toán bằng VNPAY</button> -->
 										<?php
 										if (session('cart')) { ?>
-											<input type="submit" value="Thanh toán bằng VNPAY" name="payment_select" class="btn btn-danger" style="width: 100%; height: 50px;">
+											<input type="submit" value="Thanh toán bằng MOMO" name="payUrl" class="btn btn-danger" style="width: 100%; height: 50px;">
+											<!-- <input type="submit" value="Thanh toán bằng VNPAY" name="payment_select" class="btn btn-success" style="width: 100%; height: 50px;"> -->
+
 										<?php } else { ?>
 											<input type="submit" value="KHÔNG CÓ SẢN PHẨM ĐỂ THANH TOÁN" name="redirect" disabled class="btn btn-danger" style="width: 100%; height: 50px;">
 										<?php } ?>
 									</div>
 								</form>
 
-								
+
 								<?php
 								if (session('cart')) { ?>
 									<input type="submit" value="@lang('lang.order_con')" name="send_order" class="btn btn-info btn-sm order text-white">
